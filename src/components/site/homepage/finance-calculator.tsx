@@ -24,14 +24,14 @@ export function FinanceCalculator() {
   }, [price, downPayment, apr, termMonths]);
 
   return (
-    <Section tone="dark">
+    <Section tone="light">
       <h2 className="font-heading mb-6 text-2xl uppercase tracking-tight">
         Finance Calculator
       </h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-price" className="text-white/70">
+            <Label htmlFor="fc-price">
               Vehicle Price ($)
             </Label>
             <Input
@@ -40,11 +40,10 @@ export function FinanceCalculator() {
               min={0}
               value={price}
               onChange={(e) => setPrice(Number(e.target.value) || 0)}
-              className="border-white/20 bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-down" className="text-white/70">
+            <Label htmlFor="fc-down">
               Down Payment ($)
             </Label>
             <Input
@@ -53,11 +52,10 @@ export function FinanceCalculator() {
               min={0}
               value={downPayment}
               onChange={(e) => setDownPayment(Number(e.target.value) || 0)}
-              className="border-white/20 bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-apr" className="text-white/70">
+            <Label htmlFor="fc-apr">
               APR (%)
             </Label>
             <Input
@@ -67,11 +65,10 @@ export function FinanceCalculator() {
               step={0.1}
               value={apr}
               onChange={(e) => setApr(Number(e.target.value) || 0)}
-              className="border-white/20 bg-transparent text-white"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-term" className="text-white/70">
+            <Label htmlFor="fc-term">
               Term (months)
             </Label>
             <Input
@@ -80,17 +77,16 @@ export function FinanceCalculator() {
               min={1}
               value={termMonths}
               onChange={(e) => setTermMonths(Number(e.target.value) || 1)}
-              className="border-white/20 bg-transparent text-white"
             />
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center gap-2 border border-white/10 p-8 text-center">
-          <p className="text-sm uppercase tracking-wide text-white/60">
+        <div className="flex flex-col items-center justify-center gap-2 border border-[#0d0d0d]/10 p-8 text-center">
+          <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
             Estimated Monthly Payment
           </p>
           <p
             data-testid="monthly-payment"
-            className="font-heading text-5xl text-white"
+            className="font-heading text-5xl text-[#0d0d0d]"
           >
             ${monthlyPayment.toFixed(2)}
           </p>

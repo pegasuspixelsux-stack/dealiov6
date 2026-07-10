@@ -1,13 +1,16 @@
 import { Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { DealershipConfig, Vehicle } from "@/types";
 
 export function VehicleCard({
   vehicle,
   dealership,
+  className,
 }: {
   vehicle: Vehicle;
   dealership: DealershipConfig;
+  className?: string;
 }) {
   const message = encodeURIComponent(
     `Hi, I'm interested in the ${vehicle.year} ${vehicle.make} ${vehicle.model}.`
@@ -15,7 +18,12 @@ export function VehicleCard({
   const whatsappHref = `https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}?text=${message}`;
 
   return (
-    <div className="group overflow-hidden border border-white/10 bg-black transition-transform hover:-translate-y-1">
+    <div
+      className={cn(
+        "group overflow-hidden border border-white/10 bg-black transition-transform hover:-translate-y-1",
+        className
+      )}
+    >
       {/* Placeholder imagery until real photography (vehicle.imageUrl) is wired in */}
       <div className="flex aspect-[4/3] w-full items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
         <Car className="size-12 text-white/20" strokeWidth={1} />

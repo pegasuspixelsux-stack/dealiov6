@@ -30,6 +30,7 @@ export function TrendVehicles({
             key={vehicle.id}
             vehicle={vehicle}
             dealership={dealership}
+            className="rounded-[12px]"
           />
         ))}
       </div>

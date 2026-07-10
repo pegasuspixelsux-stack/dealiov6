@@ -1,14 +1,15 @@
 import type { DealershipConfig } from "@/types";
 
-export const DEMO_DEALERSHIP_CONFIG: DealershipConfig = {
-  id: "demo-dealership",
-  name: "Demo Motors",
+export const ULTIMA_DEALERSHIP_CONFIG: DealershipConfig = {
+  id: "ultima-cars",
+  name: "Ultima.cars",
   logoUrl: undefined,
-  primaryColor: "oklch(0.55 0.18 255)",
-  secondaryColor: "oklch(0.7 0.15 145)",
+  primaryColor: "#0d0d0d",
+  secondaryColor: "#f9f9f9",
+  radius: "0px",
   phone: "+1 (555) 010-0100",
   whatsapp: "+15550100100",
-  email: "sales@demomotors.example",
+  email: "sales@ultima.cars.example",
   address: "123 Auto Row, Springfield, ST 00000",
   mapsLocation: { lat: 39.7817, lng: -89.6501 },
   hours: {
@@ -24,7 +25,8 @@ export const DEMO_DEALERSHIP_CONFIG: DealershipConfig = {
   financePartner: undefined,
   tradeInSettings: { enabled: true, minYear: 2005 },
   seoDefaults: {
-    title: "Demo Motors — Quality Vehicles",
-    description: "Browse new and used vehicles at Demo Motors.",
+    title: "Ultima.cars — High-Octane Automotive Experience",
+    description:
+      "Discover, finance, and trade in premium vehicles at Ultima.cars.",
   },
 };

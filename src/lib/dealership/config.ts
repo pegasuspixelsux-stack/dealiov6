@@ -1,8 +1,8 @@
 import { dealershipConfigSchema, type DealershipConfig } from "@/types";
-import { DEMO_DEALERSHIP_CONFIG } from "./mock-data";
+import { ULTIMA_DEALERSHIP_CONFIG } from "./mock-data";
 
 export const DEFAULT_DEALERSHIP_ID =
-  process.env.NEXT_PUBLIC_DEFAULT_DEALERSHIP_ID ?? "demo-dealership";
+  process.env.NEXT_PUBLIC_DEFAULT_DEALERSHIP_ID ?? "ultima-cars";
 
 /**
  * Resolves which dealership a request belongs to. Today this always returns
@@ -24,5 +24,5 @@ export function getDealershipConfig(
   dealershipId: string = DEFAULT_DEALERSHIP_ID
 ): DealershipConfig {
   void dealershipId;
-  return dealershipConfigSchema.parse(DEMO_DEALERSHIP_CONFIG);
+  return dealershipConfigSchema.parse(ULTIMA_DEALERSHIP_CONFIG);
 }

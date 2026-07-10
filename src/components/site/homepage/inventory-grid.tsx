@@ -1,0 +1,36 @@
+import Link from "next/link";
+import { Section } from "./section";
+import { VehicleCard } from "./vehicle-card";
+import { Button } from "@/components/ui/button";
+import { MOCK_VEHICLES } from "@/lib/vehicles/mock-data";
+import type { DealershipConfig } from "@/types";
+
+export function InventoryGrid({
+  dealership,
+}: {
+  dealership: DealershipConfig;
+}) {
+  return (
+    <Section tone="dark">
+      <h2 className="font-heading mb-6 text-2xl uppercase tracking-tight">
+        Full Inventory
+      </h2>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {MOCK_VEHICLES.map((vehicle) => (
+          <VehicleCard
+            key={vehicle.id}
+            vehicle={vehicle}
+            dealership={dealership}
+          />
+        ))}
+      </div>
+      <div className="mt-8 flex justify-center">
+        <Button
+          size="lg"
+          className="bg-white text-black hover:bg-white/80"
+          render={<Link href="/inventory">See All Inventory</Link>}
+        />
+      </div>
+    </Section>
+  );
+}

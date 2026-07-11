@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import type { DealershipConfig } from "@/types";
 
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
@@ -24,6 +25,10 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
             Encontrá el auto que acompaña tu estilo de vida
           </p>
         </div>
+      </div>
+      <div className="absolute inset-x-0 bottom-4 flex flex-col items-center gap-1 text-white/40">
+        <span className="text-xs tracking-widest uppercase">Explorar</span>
+        <ChevronDown className="size-4 animate-pulse" />
       </div>
     </section>
   );

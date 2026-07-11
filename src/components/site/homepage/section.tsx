@@ -14,7 +14,7 @@ export function Section({ tone, children, className }: SectionProps) {
         "py-12 md:py-20",
         tone === "dark"
           ? "bg-[#0d0d0d] text-white"
-          : "bg-[#f9f9f9] text-[#0d0d0d]",
+          : "bg-transparent text-[#0d0d0d]",
         className
       )}
     >

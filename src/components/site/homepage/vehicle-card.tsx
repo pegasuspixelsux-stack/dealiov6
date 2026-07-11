@@ -7,10 +7,12 @@ export function VehicleCard({
   vehicle,
   dealership,
   className,
+  footerTone = "light",
 }: {
   vehicle: Vehicle;
   dealership: DealershipConfig;
   className?: string;
+  footerTone?: "light" | "dark";
 }) {
   const message = encodeURIComponent(
     `Hola, me interesa el ${vehicle.make} ${vehicle.model} ${vehicle.year}.`
@@ -37,13 +39,24 @@ export function VehicleCard({
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-3 bg-white p-4 text-[#0d0d0d]">
+      <div
+        className={cn(
+          "flex items-center justify-between gap-3 p-4",
+          footerTone === "dark"
+            ? "bg-[#0d0d0d] text-white"
+            : "bg-white text-[#0d0d0d]"
+        )}
+      >
         <p className="text-xl font-semibold">
           ${vehicle.price.toLocaleString()}
         </p>
         <Button
           size="sm"
-          className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
+          className={
+            footerTone === "dark"
+              ? "bg-white text-[#0d0d0d] hover:bg-white/80"
+              : "bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
+          }
           render={<a href={whatsappHref}>Consultar</a>}
         />
       </div>

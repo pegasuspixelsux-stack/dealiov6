@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Archivo_Black } from "next/font/google";
+import { Inter, Geist_Mono, Archivo_Black } from "next/font/google";
 import { headers } from "next/headers";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getDealershipConfig, resolveDealershipId } from "@/lib/dealership/config";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -45,13 +45,14 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${archivoBlack.variable} h-full antialiased`}
+      lang="es"
+      className={`${inter.variable} ${geistMono.variable} ${archivoBlack.variable} h-full antialiased`}
       style={
         {
           "--brand-primary": dealership.primaryColor,
           "--brand-secondary": dealership.secondaryColor,
           "--brand-radius": dealership.radius,
+          "--brand-radius-interactive": dealership.radiusInteractive,
         } as React.CSSProperties
       }
     >

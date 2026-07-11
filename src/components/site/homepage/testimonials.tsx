@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface Testimonial {
   name: string;
+  city: string;
   quote: string;
   rating: number;
 }
@@ -13,18 +14,21 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     name: "Martín G.",
+    city: "Buenos Aires",
     quote:
       "Todo el proceso fue impecable: encontré mi auto, lo financié y me lo llevé en menos de dos horas.",
     rating: 5,
   },
   {
     name: "Lucía R.",
+    city: "Córdoba",
     quote:
       "La tasación de mi usado fue justa y mucho más rápida de lo que esperaba. Totalmente recomendable.",
     rating: 5,
   },
   {
     name: "Nicolás F.",
+    city: "Rosario",
     quote:
       "La calidad del inventario es inigualable. Cada auto era exactamente como en las fotos.",
     rating: 5,
@@ -51,16 +55,13 @@ export function Testimonials() {
       </div>
 
       <div key={testimonial.name} className="border border-[#0d0d0d]/10 p-6">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center">
-            <Avatar className="size-16">
-              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <Avatar className="-ml-8 size-16 border-2 border-white">
-              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-            </Avatar>
-          </div>
-          <span className="text-sm font-medium">{testimonial.name}</span>
+        <div className="flex items-center">
+          <Avatar className="size-16">
+            <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <Avatar className="-ml-8 size-16 border-2 border-white">
+            <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+          </Avatar>
         </div>
         <div className="mt-4 mb-3 flex gap-1">
           {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
@@ -68,6 +69,10 @@ export function Testimonials() {
           ))}
         </div>
         <p className="text-[#0d0d0d]/80">&ldquo;{testimonial.quote}&rdquo;</p>
+        <div className="mt-4">
+          <p className="text-sm font-medium">{testimonial.name}</p>
+          <p className="text-sm text-[#0d0d0d]/60">{testimonial.city}</p>
+        </div>
       </div>
 
       <div className="flex justify-center gap-2">

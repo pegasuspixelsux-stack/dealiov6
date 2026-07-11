@@ -1,0 +1,43 @@
+import "server-only";
+import { adminFirestore } from "@/lib/firebase/admin";
+import { vehicleSchema, type Vehicle } from "@/types";
+import type { z } from "zod";
+
+export async function getVehicles(dealershipId: string): Promise<Vehicle[]> {
+  if (!adminFirestore) return [];
+
+  const snapshot = await adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .collection("vehicles")
+    .orderBy("createdAt", "desc")
+    .get();
+
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Vehicle);
+}
+
+export async function createVehicle(
+  dealershipId: string,
+  input: z.infer<typeof vehicleSchema>
+): Promise<string> {
+  if (!adminFirestore) {
+    throw new Error("Firestore is not configured.");
+  }
+
+  const now = new Date();
+  const ref = adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .collection("vehicles")
+    .doc();
+
+  await ref.set({
+    ...input,
+    id: ref.id,
+    dealershipId,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  return ref.id;
+}

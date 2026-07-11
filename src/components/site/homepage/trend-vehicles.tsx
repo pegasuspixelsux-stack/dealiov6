@@ -14,16 +14,9 @@ export function TrendVehicles({
 
   return (
     <Section tone="light">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="font-heading text-2xl tracking-tight">
-          Vehículos Usados
-        </h2>
-        <Button
-          variant="outline"
-          className="border-[#0d0d0d] text-[#0d0d0d] hover:bg-[#0d0d0d] hover:text-white"
-          render={<Link href="/inventory">Ver Todo el Inventario</Link>}
-        />
-      </div>
+      <h2 className="font-heading mb-6 text-2xl tracking-tight">
+        Vehículos Nuevos
+      </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((vehicle) => (
           <VehicleCard
@@ -33,6 +26,13 @@ export function TrendVehicles({
             className="rounded-[12px]"
           />
         ))}
+      </div>
+      <div className="mt-8 flex justify-center">
+        <Button
+          variant="outline"
+          className="border-[#0d0d0d] text-[#0d0d0d] hover:bg-[#0d0d0d] hover:text-white"
+          render={<Link href="/inventory">Ver Todo el Inventario</Link>}
+        />
       </div>
     </Section>
   );

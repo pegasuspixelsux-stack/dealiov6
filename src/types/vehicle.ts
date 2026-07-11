@@ -10,7 +10,7 @@ export interface Vehicle {
   year: number;
   price: number;
   mileage: number;
-  imageUrl: string;
+  imageUrls: string[];
   category: VehicleCategory;
   featured: boolean;
 }
@@ -21,7 +21,7 @@ export const vehicleSchema = z.object({
   year: z.number().int().min(1900).max(2100),
   price: z.number().nonnegative(),
   mileage: z.number().nonnegative(),
-  imageUrl: z.string().url(),
+  imageUrls: z.array(z.string().url()).min(1).max(8),
   category: z.enum(["new", "used"]),
   featured: z.boolean(),
 });

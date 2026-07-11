@@ -6,14 +6,15 @@ export function About({ dealership }: { dealership: DealershipConfig }) {
     <Section tone="light">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <h2 className="font-heading text-3xl uppercase tracking-tight sm:text-4xl">
-          Built for drivers who demand more.
+          Hecho para quienes exigen más al volante.
         </h2>
         <p className="text-base leading-relaxed text-[#0d0d0d]/70">
-          {dealership.name} curates a high-performance inventory backed by
-          transparent pricing, fast financing, and a team that treats every
-          test drive like the start of a partnership. From studio-quality
-          listings to hassle-free trade-ins, every part of the experience is
-          engineered around getting you into the right car, faster.
+          {dealership.name} selecciona un inventario de alto rendimiento
+          respaldado por precios transparentes, financiación rápida y un
+          equipo que trata cada test drive como el comienzo de una relación.
+          Desde publicaciones de calidad de estudio hasta canjes sin
+          complicaciones, cada parte de la experiencia está pensada para
+          ponerte en el auto correcto, más rápido.
         </p>
       </div>
     </Section>

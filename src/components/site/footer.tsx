@@ -1,6 +1,16 @@
 import { MapPin, Phone, MessageCircle, Mail } from "lucide-react";
 import type { DealershipConfig } from "@/types";
 
+const DAY_LABELS: Record<string, string> = {
+  monday: "Lunes",
+  tuesday: "Martes",
+  wednesday: "Miércoles",
+  thursday: "Jueves",
+  friday: "Viernes",
+  saturday: "Sábado",
+  sunday: "Domingo",
+};
+
 export function Footer({ dealership }: { dealership: DealershipConfig }) {
   return (
     <footer className="border-t bg-muted/30">
@@ -28,11 +38,11 @@ export function Footer({ dealership }: { dealership: DealershipConfig }) {
         </div>
 
         <div>
-          <h3 className="font-semibold">Hours</h3>
+          <h3 className="font-semibold">Horario</h3>
           <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
             {Object.entries(dealership.hours).map(([day, hours]) => (
-              <li key={day} className="flex justify-between gap-4 capitalize">
-                <span>{day}</span>
+              <li key={day} className="flex justify-between gap-4">
+                <span>{DAY_LABELS[day] ?? day}</span>
                 <span>{hours}</span>
               </li>
             ))}
@@ -41,7 +51,7 @@ export function Footer({ dealership }: { dealership: DealershipConfig }) {
       </div>
 
       <div className="border-t px-4 py-4 text-center text-xs text-muted-foreground">
-        &copy; {new Date().getFullYear()} {dealership.name}. All rights reserved.
+        &copy; {new Date().getFullYear()} {dealership.name}. Todos los derechos reservados.
       </div>
     </footer>
   );

@@ -26,13 +26,13 @@ export function FinanceCalculator() {
   return (
     <Section tone="light">
       <h2 className="font-heading mb-6 text-2xl uppercase tracking-tight">
-        Finance Calculator
+        Calculadora de Financiación
       </h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-price">
-              Vehicle Price ($)
+              Precio del Vehículo ($)
             </Label>
             <Input
               id="fc-price"
@@ -44,7 +44,7 @@ export function FinanceCalculator() {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-down">
-              Down Payment ($)
+              Anticipo ($)
             </Label>
             <Input
               id="fc-down"
@@ -56,7 +56,7 @@ export function FinanceCalculator() {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-apr">
-              APR (%)
+              Tasa de Interés Anual (%)
             </Label>
             <Input
               id="fc-apr"
@@ -69,7 +69,7 @@ export function FinanceCalculator() {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-term">
-              Term (months)
+              Plazo (meses)
             </Label>
             <Input
               id="fc-term"
@@ -82,7 +82,7 @@ export function FinanceCalculator() {
         </div>
         <div className="flex flex-col items-center justify-center gap-2 border border-[#0d0d0d]/10 p-8 text-center">
           <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
-            Estimated Monthly Payment
+            Cuota Mensual Estimada
           </p>
           <p
             data-testid="monthly-payment"

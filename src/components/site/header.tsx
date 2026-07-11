@@ -12,9 +12,9 @@ import { Logo } from "@/components/shared/logo";
 import type { DealershipConfig } from "@/types";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/inventory", label: "Inventory" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Inicio" },
+  { href: "/inventory", label: "Inventario" },
+  { href: "/contact", label: "Contacto" },
 ];
 
 export function Header({ dealership }: { dealership: DealershipConfig }) {
@@ -37,7 +37,7 @@ export function Header({ dealership }: { dealership: DealershipConfig }) {
 
         <Button
           className="hidden md:inline-flex"
-          render={<Link href="/login">Dashboard Login</Link>}
+          render={<Link href="/login">Iniciar sesión</Link>}
         />
 
         <Sheet>
@@ -45,7 +45,7 @@ export function Header({ dealership }: { dealership: DealershipConfig }) {
             render={
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="size-5" />
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">Abrir menú</span>
               </Button>
             }
           />
@@ -66,7 +66,7 @@ export function Header({ dealership }: { dealership: DealershipConfig }) {
                 </Link>
               ))}
               <Link href="/login" className="text-sm font-medium">
-                Dashboard Login
+                Iniciar sesión
               </Link>
             </nav>
           </SheetContent>

@@ -10,21 +10,21 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Jordan M.",
+    name: "Martín G.",
     quote:
-      "The whole process was seamless — found my car, financed it, and drove off in under two hours.",
+      "Todo el proceso fue impecable: encontré mi auto, lo financié y me lo llevé en menos de dos horas.",
     rating: 5,
   },
   {
-    name: "Priya S.",
+    name: "Lucía R.",
     quote:
-      "Trade-in valuation was spot on and way faster than I expected. Highly recommend.",
+      "La tasación de mi usado fue justa y mucho más rápida de lo que esperaba. Totalmente recomendable.",
     rating: 5,
   },
   {
-    name: "Marcus T.",
+    name: "Nicolás F.",
     quote:
-      "Inventory quality is unmatched. Every car looked exactly like the photos.",
+      "La calidad del inventario es inigualable. Cada auto era exactamente como en las fotos.",
     rating: 5,
   },
 ];
@@ -33,7 +33,7 @@ export function Testimonials() {
   return (
     <Section tone="dark">
       <h2 className="font-heading mb-8 text-2xl uppercase tracking-tight">
-        What Drivers Are Saying
+        Lo Que Dicen Nuestros Clientes
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {TESTIMONIALS.map((testimonial) => (

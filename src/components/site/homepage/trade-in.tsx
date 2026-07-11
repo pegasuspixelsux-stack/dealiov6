@@ -26,13 +26,13 @@ const INITIAL_STATE: TradeInFormState = {
 
 function validate(state: TradeInFormState): string | null {
   if (!state.year || !state.make || !state.model || !state.mileage) {
-    return "Please fill in your vehicle's year, make, model, and mileage.";
+    return "Por favor completá el año, marca, modelo y kilometraje de tu vehículo.";
   }
   if (!state.name) {
-    return "Please enter your name.";
+    return "Por favor ingresá tu nombre.";
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
-    return "Please enter a valid email address.";
+    return "Por favor ingresá un correo electrónico válido.";
   }
   return null;
 }
@@ -66,11 +66,11 @@ export function TradeIn() {
       <Section tone="light">
         <div className="mx-auto max-w-xl text-center">
           <h2 className="font-heading text-2xl uppercase tracking-tight">
-            Thanks! We&apos;ll be in touch.
+            ¡Gracias! Nos pondremos en contacto.
           </h2>
           <p className="mt-2 text-[#0d0d0d]/70">
-            A member of our trade-in team will reach out with your
-            vehicle&apos;s estimated value shortly.
+            Un integrante de nuestro equipo de canjes se pondrá en contacto
+            pronto con el valor estimado de tu vehículo.
           </p>
         </div>
       </Section>
@@ -81,16 +81,15 @@ export function TradeIn() {
     <Section tone="light">
       <div className="mx-auto max-w-xl">
         <h2 className="font-heading mb-2 text-2xl uppercase tracking-tight">
-          Get Your Trade-In Value
+          Conocé el Valor de tu Vehículo
         </h2>
         <p className="mb-6 text-[#0d0d0d]/70">
-          Tell us about your current vehicle and we&apos;ll send you an
-          estimate.
+          Contanos sobre tu vehículo actual y te enviaremos una estimación.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="ti-year">Year</Label>
+              <Label htmlFor="ti-year">Año</Label>
               <Input
                 id="ti-year"
                 value={form.year}
@@ -98,7 +97,7 @@ export function TradeIn() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="ti-mileage">Mileage</Label>
+              <Label htmlFor="ti-mileage">Kilometraje</Label>
               <Input
                 id="ti-mileage"
                 value={form.mileage}
@@ -106,7 +105,7 @@ export function TradeIn() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="ti-make">Make</Label>
+              <Label htmlFor="ti-make">Marca</Label>
               <Input
                 id="ti-make"
                 value={form.make}
@@ -114,7 +113,7 @@ export function TradeIn() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="ti-model">Model</Label>
+              <Label htmlFor="ti-model">Modelo</Label>
               <Input
                 id="ti-model"
                 value={form.model}
@@ -123,7 +122,7 @@ export function TradeIn() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="ti-name">Your Name</Label>
+            <Label htmlFor="ti-name">Tu Nombre</Label>
             <Input
               id="ti-name"
               value={form.name}
@@ -131,7 +130,7 @@ export function TradeIn() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="ti-email">Email</Label>
+            <Label htmlFor="ti-email">Correo Electrónico</Label>
             <Input
               id="ti-email"
               type="email"
@@ -144,7 +143,7 @@ export function TradeIn() {
             type="submit"
             className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
           >
-            Get My Estimate
+            Obtener mi Estimación
           </Button>
         </form>
       </div>

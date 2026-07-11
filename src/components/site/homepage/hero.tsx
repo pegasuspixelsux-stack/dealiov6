@@ -9,7 +9,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
           {dealership.name}
         </h1>
         <p className="text-lg text-white/70">
-          High-fidelity vehicles. High-octane experience.
+          Vehículos de alta gama. Experiencia de alto octanaje.
         </p>
         <Button
           size="lg"
@@ -18,7 +18,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
             <a
               href={`https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}`}
             >
-              Chat on WhatsApp
+              Chatear por WhatsApp
             </a>
           }
         />

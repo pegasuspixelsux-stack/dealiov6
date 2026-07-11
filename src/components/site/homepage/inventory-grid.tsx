@@ -13,7 +13,7 @@ export function InventoryGrid({
   return (
     <Section tone="dark">
       <h2 className="font-heading mb-6 text-2xl uppercase tracking-tight">
-        Full Inventory
+        Inventario Completo
       </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {MOCK_VEHICLES.map((vehicle) => (
@@ -28,7 +28,7 @@ export function InventoryGrid({
         <Button
           size="lg"
           className="bg-white text-black hover:bg-white/80"
-          render={<Link href="/inventory">See All Inventory</Link>}
+          render={<Link href="/inventory">Ver Todo el Inventario</Link>}
         />
       </div>
     </Section>

@@ -13,7 +13,7 @@ export function VehicleCard({
   className?: string;
 }) {
   const message = encodeURIComponent(
-    `Hi, I'm interested in the ${vehicle.year} ${vehicle.make} ${vehicle.model}.`
+    `Hola, me interesa el ${vehicle.make} ${vehicle.model} ${vehicle.year}.`
   );
   const whatsappHref = `https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}?text=${message}`;
 
@@ -33,8 +33,8 @@ export function VehicleCard({
           {vehicle.year} {vehicle.make} {vehicle.model}
         </h3>
         <p className="text-sm text-white/60">
-          {vehicle.mileage.toLocaleString()} mi ·{" "}
-          {vehicle.category === "new" ? "New" : "Used"}
+          {vehicle.mileage.toLocaleString()} km ·{" "}
+          {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
         <p className="mt-2 text-xl font-semibold">
           ${vehicle.price.toLocaleString()}
@@ -42,7 +42,7 @@ export function VehicleCard({
         <Button
           size="sm"
           className="mt-3 bg-white text-black hover:bg-white/80"
-          render={<a href={whatsappHref}>Inquire</a>}
+          render={<a href={whatsappHref}>Consultar</a>}
         />
       </div>
     </div>

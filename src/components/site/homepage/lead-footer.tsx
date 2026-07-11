@@ -20,9 +20,9 @@ interface LeadFormState {
 const INITIAL_STATE: LeadFormState = { name: "", phone: "", message: "" };
 
 function validate(state: LeadFormState): string | null {
-  if (!state.name) return "Please enter your name.";
+  if (!state.name) return "Por favor ingresá tu nombre.";
   if (!/^[\d+\-() ]{7,}$/.test(state.phone)) {
-    return "Please enter a valid phone number.";
+    return "Por favor ingresá un número de teléfono válido.";
   }
   return null;
 }
@@ -57,24 +57,24 @@ export function LeadFooter() {
     <Section tone="light">
       <div className="mx-auto max-w-xl text-center">
         <h2 className="font-heading mb-2 text-2xl uppercase tracking-tight">
-          Need a Car?
+          ¿Buscás un Auto?
         </h2>
         {submitted ? (
           <p className="text-[#0d0d0d]/70">
-            Thanks — we&apos;ve got your message and will reach out shortly.
+            ¡Gracias! Recibimos tu mensaje y te contactaremos pronto.
           </p>
         ) : (
           <>
             <p className="mb-6 text-[#0d0d0d]/70">
-              Tell us what you&apos;re looking for and a member of our team
-              will follow up.
+              Contanos qué estás buscando y un integrante de nuestro equipo
+              se pondrá en contacto.
             </p>
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-4 text-left"
             >
               <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-name">Name</Label>
+                <Label htmlFor="lf-name">Nombre</Label>
                 <Input
                   id="lf-name"
                   value={form.name}
@@ -82,7 +82,7 @@ export function LeadFooter() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-phone">Phone</Label>
+                <Label htmlFor="lf-phone">Teléfono</Label>
                 <Input
                   id="lf-phone"
                   value={form.phone}
@@ -90,7 +90,7 @@ export function LeadFooter() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-message">What are you looking for?</Label>
+                <Label htmlFor="lf-message">¿Qué estás buscando?</Label>
                 <Textarea
                   id="lf-message"
                   value={form.message}
@@ -102,7 +102,7 @@ export function LeadFooter() {
                 type="submit"
                 className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
               >
-                Send Message
+                Enviar Mensaje
               </Button>
             </form>
           </>

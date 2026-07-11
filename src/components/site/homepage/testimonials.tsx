@@ -32,7 +32,7 @@ const TESTIMONIALS: Testimonial[] = [
 export function Testimonials() {
   return (
     <Section tone="dark">
-      <h2 className="font-heading mb-8 text-2xl uppercase tracking-tight">
+      <h2 className="font-heading mb-8 text-2xl lowercase tracking-tight">
         Lo Que Dicen Nuestros Clientes
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -40,14 +40,22 @@ export function Testimonials() {
           <div key={testimonial.name} className="border border-white/10 p-6">
             <div className="mb-3 flex gap-1">
               {Array.from({ length: testimonial.rating }).map((_, index) => (
-                <Star key={index} className="size-4 fill-white text-white" />
+                <Star
+                  key={index}
+                  className="size-4 fill-[var(--ultima-tertiary)] text-[var(--ultima-tertiary)]"
+                />
               ))}
             </div>
             <p className="text-white/80">&ldquo;{testimonial.quote}&rdquo;</p>
             <div className="mt-4 flex items-center gap-3">
-              <Avatar>
-                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-              </Avatar>
+              <div className="flex items-center">
+                <Avatar>
+                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <Avatar className="-ml-4 border-2 border-[#0d0d0d]">
+                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+              </div>
               <span className="text-sm font-medium">{testimonial.name}</span>
             </div>
           </div>

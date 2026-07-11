@@ -41,6 +41,7 @@ export const dealershipConfigSchema = z.object({
   primaryColor: z.string(),
   secondaryColor: z.string(),
   radius: z.string().default("0.625rem"),
+  radiusInteractive: z.string().default("9999px"),
   phone: z.string(),
   whatsapp: z.string(),
   email: z.string().email(),

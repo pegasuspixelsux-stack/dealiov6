@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { Section } from "./section";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface Testimonial {
@@ -44,68 +43,66 @@ export function Testimonials() {
   };
 
   return (
-    <Section tone="dark">
-      <div className="grid grid-cols-1 items-center gap-8">
-        <div>
-          <h2 className="font-heading text-2xl tracking-tight">
-            Lo Que Dicen Nuestros Clientes
-          </h2>
-          <div className="mt-6 flex gap-2">
-            <button
-              type="button"
-              onClick={() => go("prev")}
-              aria-label="Testimonio anterior"
-              className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
-            >
-              <ChevronLeft className="size-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => go("next")}
-              aria-label="Siguiente testimonio"
-              className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
-            >
-              <ChevronRight className="size-4" />
-            </button>
-          </div>
-          <div className="mt-6 flex gap-2">
-            {TESTIMONIALS.map((item, itemIndex) => (
-              <button
-                key={item.name}
-                type="button"
-                onClick={() => setIndex(itemIndex)}
-                aria-label={`Ir al testimonio de ${item.name}`}
-                className={`size-2 rounded-full transition-colors ${
-                  itemIndex === index ? "bg-white" : "bg-white/30"
-                }`}
-              />
-            ))}
-          </div>
+    <div className="flex flex-col gap-8">
+      <div>
+        <h2 className="font-heading text-2xl tracking-tight">
+          Lo Que Dicen Nuestros Clientes
+        </h2>
+        <div className="mt-6 flex gap-2">
+          <button
+            type="button"
+            onClick={() => go("prev")}
+            aria-label="Testimonio anterior"
+            className="flex size-9 items-center justify-center rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] transition-colors hover:bg-[var(--ultima-surface-container)]"
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go("next")}
+            aria-label="Siguiente testimonio"
+            className="flex size-9 items-center justify-center rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] transition-colors hover:bg-[var(--ultima-surface-container)]"
+          >
+            <ChevronRight className="size-4" />
+          </button>
         </div>
-
-        <div key={testimonial.name} className="border border-white/10 p-6">
-          <div className="mb-3 flex gap-1">
-            {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
-              <Star
-                key={starIndex}
-                className="size-4 fill-[var(--ultima-tertiary)] text-[var(--ultima-tertiary)]"
-              />
-            ))}
-          </div>
-          <p className="text-white/80">&ldquo;{testimonial.quote}&rdquo;</p>
-          <div className="mt-4 flex items-center gap-3">
-            <div className="flex items-center">
-              <Avatar>
-                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <Avatar className="-ml-4 border-2 border-[#0d0d0d]">
-                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </div>
-            <span className="text-sm font-medium">{testimonial.name}</span>
-          </div>
+        <div className="mt-6 flex gap-2">
+          {TESTIMONIALS.map((item, itemIndex) => (
+            <button
+              key={item.name}
+              type="button"
+              onClick={() => setIndex(itemIndex)}
+              aria-label={`Ir al testimonio de ${item.name}`}
+              className={`size-2 rounded-full transition-colors ${
+                itemIndex === index ? "bg-[#0d0d0d]" : "bg-[#0d0d0d]/30"
+              }`}
+            />
+          ))}
         </div>
       </div>
-    </Section>
+
+      <div key={testimonial.name} className="border border-[#0d0d0d]/10 p-6">
+        <div className="mb-3 flex gap-1">
+          {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
+            <Star
+              key={starIndex}
+              className="size-4 fill-[var(--ultima-tertiary)] text-[var(--ultima-tertiary)]"
+            />
+          ))}
+        </div>
+        <p className="text-[#0d0d0d]/80">&ldquo;{testimonial.quote}&rdquo;</p>
+        <div className="mt-4 flex items-center gap-3">
+          <div className="flex items-center">
+            <Avatar>
+              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <Avatar className="-ml-4 border-2 border-white">
+              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+          </div>
+          <span className="text-sm font-medium">{testimonial.name}</span>
+        </div>
+      </div>
+    </div>
   );
 }

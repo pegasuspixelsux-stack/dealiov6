@@ -18,7 +18,9 @@ export function Section({ tone, children, className }: SectionProps) {
         className
       )}
     >
-      <div className="mx-auto max-w-6xl px-4">{children}</div>
+      <div className="mx-auto max-w-[1440px] px-4 md:px-[50px]">
+        {children}
+      </div>
     </section>
   );
 }

@@ -5,7 +5,6 @@ import {
   type ChangeEvent,
   type FormEvent,
 } from "react";
-import { Section } from "./section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -54,60 +53,55 @@ export function LeadFooter() {
   }
 
   return (
-    <Section tone="light">
-      <div className="mx-auto max-w-xl text-center">
-        <h2 className="font-heading mb-2 text-2xl tracking-tight">
-          ¿Buscás un Auto?
-        </h2>
-        {submitted ? (
-          <p className="text-[#0d0d0d]/70">
-            ¡Gracias! Recibimos tu mensaje y te contactaremos pronto.
+    <div>
+      <h2 className="font-heading mb-2 text-2xl tracking-tight">
+        ¿Buscás un Auto?
+      </h2>
+      {submitted ? (
+        <p className="text-[#0d0d0d]/70">
+          ¡Gracias! Recibimos tu mensaje y te contactaremos pronto.
+        </p>
+      ) : (
+        <>
+          <p className="mb-6 text-[#0d0d0d]/70">
+            Contanos qué estás buscando y un integrante de nuestro equipo
+            se pondrá en contacto.
           </p>
-        ) : (
-          <>
-            <p className="mb-6 text-[#0d0d0d]/70">
-              Contanos qué estás buscando y un integrante de nuestro equipo
-              se pondrá en contacto.
-            </p>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-4 text-left"
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="lf-name">Nombre</Label>
+              <Input
+                id="lf-name"
+                value={form.name}
+                onChange={handleChange("name")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="lf-phone">Teléfono</Label>
+              <Input
+                id="lf-phone"
+                value={form.phone}
+                onChange={handleChange("phone")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="lf-message">¿Qué estás buscando?</Label>
+              <Textarea
+                id="lf-message"
+                value={form.message}
+                onChange={handleChange("message")}
+              />
+            </div>
+            {error && <p className="text-sm text-red-600">{error}</p>}
+            <Button
+              type="submit"
+              className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
             >
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-name">Nombre</Label>
-                <Input
-                  id="lf-name"
-                  value={form.name}
-                  onChange={handleChange("name")}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-phone">Teléfono</Label>
-                <Input
-                  id="lf-phone"
-                  value={form.phone}
-                  onChange={handleChange("phone")}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="lf-message">¿Qué estás buscando?</Label>
-                <Textarea
-                  id="lf-message"
-                  value={form.message}
-                  onChange={handleChange("message")}
-                />
-              </div>
-              {error && <p className="text-sm text-red-600">{error}</p>}
-              <Button
-                type="submit"
-                className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
-              >
-                Enviar Mensaje
-              </Button>
-            </form>
-          </>
-        )}
-      </div>
-    </Section>
+              Enviar Mensaje
+            </Button>
+          </form>
+        </>
+      )}
+    </div>
   );
 }

@@ -6,8 +6,8 @@ import { TrendVehicles } from "@/components/site/homepage/trend-vehicles";
 import { About } from "@/components/site/homepage/about";
 import { InventoryGrid } from "@/components/site/homepage/inventory-grid";
 import { FinanceCalculator } from "@/components/site/homepage/finance-calculator";
-import { TradeInTestimonials } from "@/components/site/homepage/trade-in-testimonials";
-import { LeadFooter } from "@/components/site/homepage/lead-footer";
+import { TradeInSection } from "@/components/site/homepage/trade-in-section";
+import { LeadTestimonials } from "@/components/site/homepage/lead-testimonials";
 
 export default async function HomePage() {
   const headerList = await headers();
@@ -23,8 +23,8 @@ export default async function HomePage() {
       <About dealership={dealership} />
       <InventoryGrid dealership={dealership} />
       <FinanceCalculator />
-      <TradeInTestimonials />
-      <LeadFooter />
+      <TradeInSection />
+      <LeadTestimonials />
     </>
   );
 }

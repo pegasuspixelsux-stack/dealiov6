@@ -76,12 +76,6 @@ export function TradeIn() {
 
   return (
     <div>
-      <h2 className="font-heading mb-2 text-2xl tracking-tight">
-        Conocé el Valor de tu Vehículo
-      </h2>
-      <p className="mb-6 text-[#0d0d0d]/70">
-        Contanos sobre tu vehículo actual y te enviaremos una estimación.
-      </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">

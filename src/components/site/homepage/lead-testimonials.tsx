@@ -1,13 +1,13 @@
 import { Section } from "./section";
 import { Testimonials } from "./testimonials";
-import { TradeIn } from "./trade-in";
+import { LeadFooter } from "./lead-footer";
 
-export function TradeInTestimonials() {
+export function LeadTestimonials() {
   return (
     <Section tone="light">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <Testimonials />
-        <TradeIn />
+        <LeadFooter />
       </div>
     </Section>
   );

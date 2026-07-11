@@ -51,16 +51,7 @@ export function Testimonials() {
       </div>
 
       <div key={testimonial.name} className="border border-[#0d0d0d]/10 p-6">
-        <div className="mb-3 flex gap-1">
-          {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
-            <Star
-              key={starIndex}
-              className="size-4 fill-[var(--ultima-tertiary)] text-[var(--ultima-tertiary)]"
-            />
-          ))}
-        </div>
-        <p className="text-[#0d0d0d]/80">&ldquo;{testimonial.quote}&rdquo;</p>
-        <div className="mt-4 flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <div className="flex items-center">
             <Avatar>
               <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
@@ -71,6 +62,12 @@ export function Testimonials() {
           </div>
           <span className="text-sm font-medium">{testimonial.name}</span>
         </div>
+        <div className="mt-4 mb-3 flex gap-1">
+          {Array.from({ length: testimonial.rating }).map((_, starIndex) => (
+            <Star key={starIndex} className="size-4 fill-black text-black" />
+          ))}
+        </div>
+        <p className="text-[#0d0d0d]/80">&ldquo;{testimonial.quote}&rdquo;</p>
       </div>
 
       <div className="flex justify-center gap-2">

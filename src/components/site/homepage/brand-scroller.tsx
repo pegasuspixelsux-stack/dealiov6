@@ -64,7 +64,7 @@ export function BrandScroller() {
           <Link
             key={brand.label}
             href={`/inventory?make=${encodeURIComponent(brand.label)}`}
-            className="group flex h-40 w-48 shrink-0 snap-start flex-col items-center justify-center gap-3 border border-[#0d0d0d]/10 bg-white p-4 text-center transition-colors hover:bg-[var(--ultima-surface-container)]"
+            className="group flex h-40 w-48 shrink-0 snap-start flex-col items-center justify-center gap-3 bg-white p-4 text-center transition-colors hover:bg-[var(--ultima-surface-container)]"
           >
             <span className="flex size-14 items-center justify-center rounded-full border border-[#0d0d0d]/15 font-heading text-lg text-[#0d0d0d]/60 transition-colors group-hover:border-[#0d0d0d]/40 group-hover:text-[#0d0d0d]">
               {brand.label

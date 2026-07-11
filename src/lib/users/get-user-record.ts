@@ -8,6 +8,6 @@ export async function getUserRecord(uid: string): Promise<UserRecord | null> {
   const snapshot = await adminFirestore.collection("users").doc(uid).get();
   if (!snapshot.exists) return null;
 
-  const parsed = userRecordSchema.safeParse({ uid, ...snapshot.data() });
+  const parsed = userRecordSchema.safeParse({ ...snapshot.data(), uid });
   return parsed.success ? parsed.data : null;
 }

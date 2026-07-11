@@ -4,7 +4,7 @@ import type { DealershipConfig } from "@/types";
 
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
   return (
-    <section className="relative flex h-[700px] w-full items-center justify-center overflow-hidden px-4 text-center text-white">
+    <section className="relative flex h-[700px] w-full items-end justify-start overflow-hidden p-[50px] text-left text-white">
       <Image
         src="/images/Coastal%20Highway_1.png"
         alt=""
@@ -13,7 +13,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-      <div className="relative flex max-w-2xl flex-col items-center gap-6">
+      <div className="relative flex max-w-2xl flex-col items-start gap-6">
         <h1 className="font-heading text-5xl tracking-tight sm:text-6xl">
           {dealership.name}
         </h1>

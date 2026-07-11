@@ -2,13 +2,14 @@ import Link from "next/link";
 import { Section } from "./section";
 import { VehicleCard } from "./vehicle-card";
 import { Button } from "@/components/ui/button";
-import { MOCK_VEHICLES } from "@/lib/vehicles/mock-data";
-import type { DealershipConfig } from "@/types";
+import type { DealershipConfig, Vehicle } from "@/types";
 
 export function InventoryGrid({
   dealership,
+  vehicles,
 }: {
   dealership: DealershipConfig;
+  vehicles: Vehicle[];
 }) {
   return (
     <Section tone="light">
@@ -16,7 +17,7 @@ export function InventoryGrid({
         Vehículos Usados
       </h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {MOCK_VEHICLES.map((vehicle) => (
+        {vehicles.map((vehicle) => (
           <VehicleCard
             key={vehicle.id}
             vehicle={vehicle}

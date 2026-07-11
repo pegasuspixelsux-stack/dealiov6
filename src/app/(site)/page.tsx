@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { getDealershipConfig, resolveDealershipId } from "@/lib/dealership/config";
+import { getVehicles } from "@/lib/vehicles/vehicles";
 import { Hero } from "@/components/site/homepage/hero";
 import { BrandScroller } from "@/components/site/homepage/brand-scroller";
 import { TrendVehicles } from "@/components/site/homepage/trend-vehicles";
@@ -15,14 +16,15 @@ export default async function HomePage() {
   const dealership = getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
+  const vehicles = await getVehicles(dealership.id);
 
   return (
     <>
       <Hero dealership={dealership} />
       <BrandScroller />
-      <TrendVehicles dealership={dealership} />
+      <TrendVehicles dealership={dealership} vehicles={vehicles} />
       <About dealership={dealership} />
-      <InventoryGrid dealership={dealership} />
+      <InventoryGrid dealership={dealership} vehicles={vehicles} />
       <FinanceCalculator />
       <TradeInSection />
       <LeadTestimonials />

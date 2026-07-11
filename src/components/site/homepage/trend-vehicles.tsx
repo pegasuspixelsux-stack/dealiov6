@@ -2,15 +2,16 @@ import Link from "next/link";
 import { Section } from "./section";
 import { VehicleCard } from "./vehicle-card";
 import { Button } from "@/components/ui/button";
-import { MOCK_VEHICLES } from "@/lib/vehicles/mock-data";
-import type { DealershipConfig } from "@/types";
+import type { DealershipConfig, Vehicle } from "@/types";
 
 export function TrendVehicles({
   dealership,
+  vehicles,
 }: {
   dealership: DealershipConfig;
+  vehicles: Vehicle[];
 }) {
-  const featured = MOCK_VEHICLES.filter((vehicle) => vehicle.featured);
+  const featured = vehicles.filter((vehicle) => vehicle.featured);
 
   return (
     <Section tone="light">

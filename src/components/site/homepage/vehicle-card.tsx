@@ -7,12 +7,10 @@ export function VehicleCard({
   vehicle,
   dealership,
   className,
-  footerTone = "light",
 }: {
   vehicle: Vehicle;
   dealership: DealershipConfig;
   className?: string;
-  footerTone?: "light" | "dark";
 }) {
   const message = encodeURIComponent(
     `Hola, me interesa el ${vehicle.make} ${vehicle.model} ${vehicle.year}.`
@@ -22,43 +20,32 @@ export function VehicleCard({
   return (
     <div
       className={cn(
-        "group overflow-hidden border border-white/10 transition-transform hover:-translate-y-1",
+        "group relative aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
         className
       )}
     >
       {/* Placeholder imagery until real photography (vehicle.imageUrl) is wired in */}
-      <div className="relative flex aspect-[4/5] w-full items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
         <Car className="size-12 text-white/20" strokeWidth={1} />
-        <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent p-4">
-          <h3 className="font-heading text-lg tracking-wide text-white">
-            {vehicle.make} {vehicle.model} {vehicle.year}
-          </h3>
-          <p className="text-sm text-white/70">
-            {vehicle.mileage.toLocaleString()} km ·{" "}
-            {vehicle.category === "new" ? "Nuevo" : "Usado"}
-          </p>
-        </div>
       </div>
-      <div
-        className={cn(
-          "flex items-center justify-between gap-3 p-4",
-          footerTone === "dark"
-            ? "bg-[#0d0d0d] text-white"
-            : "bg-white text-[#0d0d0d]"
-        )}
-      >
-        <p className="text-xl font-semibold">
-          ${vehicle.price.toLocaleString()}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4">
+        <h3 className="font-heading text-lg tracking-wide text-white">
+          {vehicle.make} {vehicle.model} {vehicle.year}
+        </h3>
+        <p className="text-sm text-white/70">
+          {vehicle.mileage.toLocaleString()} km ·{" "}
+          {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
-        <Button
-          size="sm"
-          className={
-            footerTone === "dark"
-              ? "bg-white text-[#0d0d0d] hover:bg-white/80"
-              : "bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
-          }
-          render={<a href={whatsappHref}>Consultar</a>}
-        />
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <p className="text-xl font-semibold text-white">
+            ${vehicle.price.toLocaleString()}
+          </p>
+          <Button
+            size="sm"
+            className="bg-white text-[#0d0d0d] hover:bg-white/80"
+            render={<a href={whatsappHref}>Consultar</a>}
+          />
+        </div>
       </div>
     </div>
   );

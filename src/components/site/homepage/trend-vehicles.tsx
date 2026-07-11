@@ -31,7 +31,6 @@ export function TrendVehicles({
             vehicle={vehicle}
             dealership={dealership}
             className="rounded-[12px]"
-            footerTone="dark"
           />
         ))}
       </div>

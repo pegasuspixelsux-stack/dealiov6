@@ -16,28 +16,39 @@ export async function getVehicles(dealershipId: string): Promise<Vehicle[]> {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Vehicle);
 }
 
+export function reserveVehicleId(dealershipId: string): string {
+  if (!adminFirestore) {
+    throw new Error("Firestore is not configured.");
+  }
+
+  return adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .collection("vehicles")
+    .doc().id;
+}
+
 export async function createVehicle(
   dealershipId: string,
+  vehicleId: string,
   input: z.infer<typeof vehicleSchema>
-): Promise<string> {
+): Promise<void> {
   if (!adminFirestore) {
     throw new Error("Firestore is not configured.");
   }
 
   const now = new Date();
-  const ref = adminFirestore
+
+  await adminFirestore
     .collection("dealerships")
     .doc(dealershipId)
     .collection("vehicles")
-    .doc();
-
-  await ref.set({
-    ...input,
-    id: ref.id,
-    dealershipId,
-    createdAt: now,
-    updatedAt: now,
-  });
-
-  return ref.id;
+    .doc(vehicleId)
+    .set({
+      ...input,
+      id: vehicleId,
+      dealershipId,
+      createdAt: now,
+      updatedAt: now,
+    });
 }

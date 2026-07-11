@@ -1,10 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import type { DealershipConfig } from "@/types";
 
-export function Logo({ dealership }: { dealership: DealershipConfig }) {
+export function Logo({
+  dealership,
+  className,
+}: {
+  dealership: DealershipConfig;
+  className?: string;
+}) {
   return (
-    <Link href="/" className="flex items-center gap-2 font-semibold">
+    <Link
+      href="/"
+      className={cn("flex items-center gap-2 font-semibold", className)}
+    >
       {dealership.logoUrl ? (
         <Image
           src={dealership.logoUrl}

@@ -21,7 +21,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
             Tu Próximo Auto Empieza Aquí
           </h1>
           <p className="text-lg text-white/70">
-            Vehículos de alta gama. Experiencia de alto octanaje.
+            Encontrá el auto que acompaña tu estilo de vida
           </p>
         </div>
       </div>

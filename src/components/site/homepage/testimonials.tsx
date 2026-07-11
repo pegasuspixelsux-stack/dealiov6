@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface Testimonial {
@@ -35,12 +35,12 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
   const testimonial = TESTIMONIALS[index];
 
-  const go = (direction: "prev" | "next") => {
-    setIndex((current) => {
-      if (direction === "next") return (current + 1) % TESTIMONIALS.length;
-      return (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
-    });
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((current) => (current + 1) % TESTIMONIALS.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="flex flex-col gap-8">
@@ -48,37 +48,6 @@ export function Testimonials() {
         <h2 className="font-heading text-2xl tracking-tight">
           Lo Que Dicen Nuestros Clientes
         </h2>
-        <div className="mt-6 flex gap-2">
-          <button
-            type="button"
-            onClick={() => go("prev")}
-            aria-label="Testimonio anterior"
-            className="flex size-9 items-center justify-center rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] transition-colors hover:bg-[var(--ultima-surface-container)]"
-          >
-            <ChevronLeft className="size-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => go("next")}
-            aria-label="Siguiente testimonio"
-            className="flex size-9 items-center justify-center rounded-full border border-[#0d0d0d]/20 text-[#0d0d0d] transition-colors hover:bg-[var(--ultima-surface-container)]"
-          >
-            <ChevronRight className="size-4" />
-          </button>
-        </div>
-        <div className="mt-6 flex gap-2">
-          {TESTIMONIALS.map((item, itemIndex) => (
-            <button
-              key={item.name}
-              type="button"
-              onClick={() => setIndex(itemIndex)}
-              aria-label={`Ir al testimonio de ${item.name}`}
-              className={`size-2 rounded-full transition-colors ${
-                itemIndex === index ? "bg-[#0d0d0d]" : "bg-[#0d0d0d]/30"
-              }`}
-            />
-          ))}
-        </div>
       </div>
 
       <div key={testimonial.name} className="border border-[#0d0d0d]/10 p-6">
@@ -102,6 +71,20 @@ export function Testimonials() {
           </div>
           <span className="text-sm font-medium">{testimonial.name}</span>
         </div>
+      </div>
+
+      <div className="flex justify-center gap-2">
+        {TESTIMONIALS.map((item, itemIndex) => (
+          <button
+            key={item.name}
+            type="button"
+            onClick={() => setIndex(itemIndex)}
+            aria-label={`Ir al testimonio de ${item.name}`}
+            className={`size-2 rounded-full transition-colors ${
+              itemIndex === index ? "bg-[#0d0d0d]" : "bg-[#0d0d0d]/30"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );

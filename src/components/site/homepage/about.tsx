@@ -5,7 +5,7 @@ export function About({ dealership }: { dealership: DealershipConfig }) {
   return (
     <Section tone="light">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <h2 className="font-heading text-3xl lowercase tracking-tight sm:text-4xl">
+        <h2 className="font-heading text-3xl tracking-tight sm:text-4xl">
           Hecho para quienes exigen más al volante.
         </h2>
         <p className="text-base leading-relaxed text-[#0d0d0d]/70">

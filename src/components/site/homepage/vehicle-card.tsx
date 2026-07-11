@@ -28,7 +28,7 @@ export function VehicleCard({
       <div className="relative flex aspect-[4/5] w-full items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
         <Car className="size-12 text-white/20" strokeWidth={1} />
         <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent p-4">
-          <h3 className="font-heading text-lg lowercase tracking-wide text-white">
+          <h3 className="font-heading text-lg tracking-wide text-white">
             {vehicle.make} {vehicle.model} {vehicle.year}
           </h3>
           <p className="text-sm text-white/70">

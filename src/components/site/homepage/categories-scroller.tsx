@@ -14,7 +14,7 @@ const CATEGORIES = [
 export function CategoriesScroller() {
   return (
     <Section tone="light">
-      <h2 className="font-heading mb-6 text-2xl lowercase tracking-tight">
+      <h2 className="font-heading mb-6 text-2xl tracking-tight">
         Explorá por categoría
       </h2>
       <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
@@ -26,7 +26,7 @@ export function CategoriesScroller() {
           >
             <ArrowUpRight className="absolute top-3 right-3 size-4 text-[#0d0d0d]/40 transition-colors group-hover:text-[#0d0d0d]" />
             <Car className="size-10 text-[#0d0d0d]/30" strokeWidth={1} />
-            <span className="font-heading text-sm lowercase tracking-wide text-[#0d0d0d]">
+            <span className="font-heading text-sm tracking-wide text-[#0d0d0d]">
               {category.label}
             </span>
           </Link>

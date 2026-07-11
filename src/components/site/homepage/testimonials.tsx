@@ -32,7 +32,7 @@ const TESTIMONIALS: Testimonial[] = [
 export function Testimonials() {
   return (
     <Section tone="dark">
-      <h2 className="font-heading mb-8 text-2xl lowercase tracking-tight">
+      <h2 className="font-heading mb-8 text-2xl tracking-tight">
         Lo Que Dicen Nuestros Clientes
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

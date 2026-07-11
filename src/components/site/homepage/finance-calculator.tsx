@@ -25,7 +25,7 @@ export function FinanceCalculator() {
 
   return (
     <Section tone="light">
-      <h2 className="font-heading mb-6 text-2xl lowercase tracking-tight">
+      <h2 className="font-heading mb-6 text-2xl tracking-tight">
         Calculadora de Financiación
       </h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">

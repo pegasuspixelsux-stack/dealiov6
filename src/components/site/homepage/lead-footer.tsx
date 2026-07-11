@@ -56,7 +56,7 @@ export function LeadFooter() {
   return (
     <Section tone="light">
       <div className="mx-auto max-w-xl text-center">
-        <h2 className="font-heading mb-2 text-2xl lowercase tracking-tight">
+        <h2 className="font-heading mb-2 text-2xl tracking-tight">
           ¿Buscás un Auto?
         </h2>
         {submitted ? (

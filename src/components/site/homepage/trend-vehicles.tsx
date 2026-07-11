@@ -16,7 +16,7 @@ export function TrendVehicles({
     <Section tone="light">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-heading text-2xl tracking-tight">
-          Vehículos Destacados
+          Vehículos Usados
         </h2>
         <Button
           variant="outline"

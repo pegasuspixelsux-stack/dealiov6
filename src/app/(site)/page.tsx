@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { getDealershipConfig, resolveDealershipId } from "@/lib/dealership/config";
 import { Hero } from "@/components/site/homepage/hero";
-import { CategoriesScroller } from "@/components/site/homepage/categories-scroller";
+import { BrandScroller } from "@/components/site/homepage/brand-scroller";
 import { TrendVehicles } from "@/components/site/homepage/trend-vehicles";
 import { About } from "@/components/site/homepage/about";
 import { InventoryGrid } from "@/components/site/homepage/inventory-grid";
@@ -19,7 +19,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero dealership={dealership} />
-      <CategoriesScroller />
+      <BrandScroller />
       <TrendVehicles dealership={dealership} />
       <About dealership={dealership} />
       <InventoryGrid dealership={dealership} />

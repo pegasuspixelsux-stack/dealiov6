@@ -45,7 +45,7 @@ export function Testimonials() {
 
   return (
     <Section tone="dark">
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 items-center gap-8">
         <div>
           <h2 className="font-heading text-2xl tracking-tight">
             Lo Que Dicen Nuestros Clientes

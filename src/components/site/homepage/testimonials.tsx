@@ -53,10 +53,10 @@ export function Testimonials() {
       <div key={testimonial.name} className="border border-[#0d0d0d]/10 p-6">
         <div className="flex items-center gap-3">
           <div className="flex items-center">
-            <Avatar>
+            <Avatar className="size-16">
               <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
             </Avatar>
-            <Avatar className="-ml-4 border-2 border-white">
+            <Avatar className="-ml-8 size-16 border-2 border-white">
               <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
             </Avatar>
           </div>

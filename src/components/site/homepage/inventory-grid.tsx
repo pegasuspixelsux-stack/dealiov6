@@ -11,7 +11,7 @@ export function InventoryGrid({
   dealership: DealershipConfig;
 }) {
   return (
-    <Section tone="dark">
+    <Section tone="light">
       <h2 className="font-heading mb-6 text-2xl tracking-tight">
         Inventario Completo
       </h2>
@@ -21,13 +21,14 @@ export function InventoryGrid({
             key={vehicle.id}
             vehicle={vehicle}
             dealership={dealership}
+            className="rounded-[12px]"
           />
         ))}
       </div>
       <div className="mt-8 flex justify-center">
         <Button
           size="lg"
-          className="bg-white text-black hover:bg-white/80"
+          className="bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
           render={<Link href="/inventory">Ver Todo el Inventario</Link>}
         />
       </div>

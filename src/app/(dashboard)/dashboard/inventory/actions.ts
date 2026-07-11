@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/auth/dal";
 import { can } from "@/lib/auth/permissions";
-import { createVehicle } from "@/lib/vehicles/vehicles";
+import { reserveVehicleId, createVehicle } from "@/lib/vehicles/vehicles";
+import { uploadVehiclePhotos } from "@/lib/vehicles/upload-photos";
 import { vehicleSchema } from "@/types";
 
 export async function createVehicleAction(
@@ -17,22 +18,40 @@ export async function createVehicleAction(
     return { success: false, error: "You don't have permission to add vehicles." };
   }
 
-  const parsed = vehicleSchema.safeParse({
-    make: formData.get("make"),
-    model: formData.get("model"),
-    year: Number(formData.get("year")),
-    price: Number(formData.get("price")),
-    mileage: Number(formData.get("mileage")),
-    imageUrl: formData.get("imageUrl"),
-    category: formData.get("category"),
-    featured: formData.get("featured") === "on",
-  });
+  const photos = formData
+    .getAll("photos")
+    .filter((f): f is File => f instanceof File && f.size > 0);
 
-  if (!parsed.success) {
+  if (photos.length === 0) {
+    return { success: false, error: "At least one photo is required." };
+  }
+  if (photos.length > 8) {
+    return { success: false, error: "Maximum 8 photos." };
+  }
+
+  const fieldsParsed = vehicleSchema
+    .omit({ imageUrls: true })
+    .safeParse({
+      make: formData.get("make"),
+      model: formData.get("model"),
+      year: Number(formData.get("year")),
+      price: Number(formData.get("price")),
+      mileage: Number(formData.get("mileage")),
+      category: formData.get("category"),
+      featured: formData.get("featured") === "on",
+    });
+
+  if (!fieldsParsed.success) {
     return { success: false, error: "Please check the form fields and try again." };
   }
 
-  await createVehicle(session.dealershipId, parsed.data);
+  const vehicleId = reserveVehicleId(session.dealershipId);
+  const imageUrls = await uploadVehiclePhotos(session.dealershipId, vehicleId, photos);
+  await createVehicle(session.dealershipId, vehicleId, {
+    ...fieldsParsed.data,
+    imageUrls,
+  });
+
   revalidatePath("/dashboard/inventory");
   return { success: true };
 }

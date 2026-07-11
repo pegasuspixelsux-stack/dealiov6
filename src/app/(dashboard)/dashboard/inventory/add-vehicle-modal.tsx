@@ -78,8 +78,15 @@ export function AddVehicleModal() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="av-imageUrl">Image URL</Label>
-            <Input id="av-imageUrl" name="imageUrl" type="url" required />
+            <Label htmlFor="av-photos">Photos (up to 8)</Label>
+            <input
+              id="av-photos"
+              name="photos"
+              type="file"
+              accept="image/*"
+              multiple
+              required
+            />
           </div>
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" name="featured" />

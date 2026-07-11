@@ -1,4 +1,5 @@
 import { Car } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { DealershipConfig, Vehicle } from "@/types";
@@ -24,10 +25,18 @@ export function VehicleCard({
         className
       )}
     >
-      {/* Placeholder imagery until real photography (vehicle.imageUrl) is wired in */}
-      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
-        <Car className="size-12 text-white/20" strokeWidth={1} />
-      </div>
+      {vehicle.imageUrls.length > 0 ? (
+        <Image
+          src={vehicle.imageUrls[0]}
+          alt={`${vehicle.make} ${vehicle.model}`}
+          fill
+          className="object-cover"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
+          <Car className="size-12 text-white/20" strokeWidth={1} />
+        </div>
+      )}
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4">
         <h3 className="font-heading text-lg tracking-wide text-white">
           {vehicle.make} {vehicle.model} {vehicle.year}

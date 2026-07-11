@@ -13,14 +13,14 @@ export function TrendVehicles({
   const featured = MOCK_VEHICLES.filter((vehicle) => vehicle.featured);
 
   return (
-    <Section tone="dark">
+    <Section tone="light">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-heading text-2xl tracking-tight">
           Vehículos Destacados
         </h2>
         <Button
           variant="outline"
-          className="border-white text-white hover:bg-white hover:text-black"
+          className="border-[#0d0d0d] text-[#0d0d0d] hover:bg-[#0d0d0d] hover:text-white"
           render={<Link href="/inventory">Ver Todo el Inventario</Link>}
         />
       </div>

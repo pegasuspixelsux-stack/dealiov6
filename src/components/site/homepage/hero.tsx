@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import type { DealershipConfig } from "@/types";
 
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
@@ -24,17 +23,6 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
           <p className="text-lg text-white/70">
             Vehículos de alta gama. Experiencia de alto octanaje.
           </p>
-          <Button
-            size="lg"
-            className="bg-white text-black hover:bg-white/80"
-            render={
-              <a
-                href={`https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}`}
-              >
-                Chatear por WhatsApp
-              </a>
-            }
-          />
         </div>
       </div>
     </section>

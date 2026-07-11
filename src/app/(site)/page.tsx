@@ -8,6 +8,7 @@ import { InventoryGrid } from "@/components/site/homepage/inventory-grid";
 import { FinanceCalculator } from "@/components/site/homepage/finance-calculator";
 import { TradeInSection } from "@/components/site/homepage/trade-in-section";
 import { LeadTestimonials } from "@/components/site/homepage/lead-testimonials";
+import { WhatsAppFab } from "@/components/site/homepage/whatsapp-fab";
 
 export default async function HomePage() {
   const headerList = await headers();
@@ -25,6 +26,7 @@ export default async function HomePage() {
       <FinanceCalculator />
       <TradeInSection />
       <LeadTestimonials />
+      <WhatsAppFab dealership={dealership} />
     </>
   );
 }

@@ -13,15 +13,15 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-      <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-end justify-start p-6 md:p-[50px]">
-        <div className="flex max-w-2xl flex-col items-start gap-6">
+      <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-end justify-start p-6 pb-20 md:p-[50px] md:pb-32">
+        <div className="flex max-w-2xl flex-col items-start gap-2">
           <p className="text-sm font-medium tracking-widest text-white/70 uppercase">
             {dealership.name}
           </p>
           <h1 className="font-heading text-3xl tracking-tight sm:text-6xl">
             Tu Próximo Auto Empieza Aquí
           </h1>
-          <p className="text-lg text-white/70">
+          <p className="max-w-md text-lg text-white/70">
             Encontrá el auto que acompaña tu estilo de vida
           </p>
         </div>

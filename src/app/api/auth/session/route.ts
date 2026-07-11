@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSession, deleteSession } from "@/lib/auth/session";
 import { adminAuth } from "@/lib/firebase/admin";
 import { DEFAULT_DEALERSHIP_ID } from "@/lib/dealership/config";
+import { getUserRecord } from "@/lib/users/get-user-record";
 import type { Role } from "@/types";
 
 const STUB_ROLES: Record<Role, { uid: string; name: string }> = {
@@ -40,15 +41,30 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-    // Verifies the token, but there is no Users module/Firestore user record
-    // yet to resolve a role/dealershipId from — that lands with the Users
-    // feature plan. Until then, real Firebase sign-in verifies but cannot
-    // complete.
-    await adminAuth.verifyIdToken(body.idToken).catch(() => null);
-    return NextResponse.json(
-      { error: "Real Firebase sign-in isn't wired to a user record yet." },
-      { status: 501 }
-    );
+
+    const decoded = await adminAuth.verifyIdToken(body.idToken).catch(() => null);
+    if (!decoded) {
+      return NextResponse.json(
+        { error: "Invalid or expired sign-in." },
+        { status: 401 }
+      );
+    }
+
+    const record = await getUserRecord(decoded.uid);
+    if (!record) {
+      return NextResponse.json(
+        { error: "No account found for this user. Contact your administrator." },
+        { status: 403 }
+      );
+    }
+
+    await createSession({
+      uid: record.uid,
+      role: record.role,
+      name: record.name,
+      dealershipId: record.dealershipId,
+    });
+    return NextResponse.json({ ok: true });
   }
 
   return NextResponse.json(

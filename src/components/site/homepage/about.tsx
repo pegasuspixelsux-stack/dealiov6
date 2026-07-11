@@ -3,7 +3,7 @@ import type { DealershipConfig } from "@/types";
 
 export function About({ dealership }: { dealership: DealershipConfig }) {
   return (
-    <Section tone="light">
+    <Section tone="light" className="bg-[#edf2fb]">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <h2 className="font-heading text-3xl tracking-tight sm:text-4xl">
           Hecho para quienes exigen más al volante.

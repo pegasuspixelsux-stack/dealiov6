@@ -23,16 +23,22 @@ export function AddVehicleModal() {
     setPending(true);
     setError(null);
 
-    const formData = new FormData(event.currentTarget);
-    const result = await createVehicleAction(formData);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    if (result.success) {
-      setOpen(false);
-      event.currentTarget.reset();
-    } else {
-      setError(result.error);
+    try {
+      const result = await createVehicleAction(formData);
+      if (result.success) {
+        setOpen(false);
+        form.reset();
+      } else {
+        setError(result.error);
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setPending(false);
     }
-    setPending(false);
   }
 
   return (

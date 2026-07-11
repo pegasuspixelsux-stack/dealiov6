@@ -2,6 +2,7 @@ import "server-only";
 import { getApps, initializeApp, cert, type App } from "firebase-admin/app";
 import { getAuth, type Auth } from "firebase-admin/auth";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import { getStorage, type Storage } from "firebase-admin/storage";
 
 function readServiceAccount() {
   const encoded = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
@@ -18,18 +19,25 @@ const serviceAccount = readServiceAccount();
 let adminApp: App | null = null;
 let adminAuth: Auth | null = null;
 let adminFirestore: Firestore | null = null;
+let adminStorage: Storage | null = null;
 
 if (serviceAccount) {
-  adminApp = getApps().length ? getApps()[0] : initializeApp({ credential: cert(serviceAccount) });
+  adminApp = getApps().length
+    ? getApps()[0]
+    : initializeApp({
+        credential: cert(serviceAccount),
+        storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+      });
   adminAuth = getAuth(adminApp);
   adminFirestore = getFirestore(adminApp);
+  adminStorage = getStorage(adminApp);
 } else if (process.env.NODE_ENV !== "production") {
   console.warn(
     "[firebase-admin] Not configured — running in stub mode. Set FIREBASE_SERVICE_ACCOUNT_KEY to enable."
   );
 }
 
-export { adminApp, adminAuth, adminFirestore };
+export { adminApp, adminAuth, adminFirestore, adminStorage };
 
 export function verifyIdTokenStub(): never {
   throw new Error(

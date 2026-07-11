@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -12,16 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MobileNav } from "./sidebar";
+import { useLogout } from "@/hooks/use-logout";
 import type { AuthenticatedUser } from "@/types";
 
 export function Topbar({ user }: { user: AuthenticatedUser }) {
-  const router = useRouter();
-
-  async function handleLogout() {
-    await fetch("/api/auth/session", { method: "DELETE" });
-    router.push("/login");
-    router.refresh();
-  }
+  const logout = useLogout();
 
   const initials = user.name
     .split(" ")
@@ -57,7 +51,7 @@ export function Topbar({ user }: { user: AuthenticatedUser }) {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={handleLogout}>
+          <DropdownMenuItem onSelect={logout}>
             <LogOut className="size-4" />
             Log out
           </DropdownMenuItem>

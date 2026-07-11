@@ -9,6 +9,7 @@ import {
   BarChart3,
   UserCog,
   Settings,
+  LogOut,
   Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { can } from "@/lib/auth/permissions";
+import { useLogout } from "@/hooks/use-logout";
 import type { Role } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +53,7 @@ const NAV_ITEMS: NavItem[] = [
 
 function NavList({ role, onNavigate }: { role: Role; onNavigate?: () => void }) {
   const pathname = usePathname();
+  const logout = useLogout();
 
   return (
     <nav className="flex flex-col gap-1 p-4">
@@ -74,6 +77,14 @@ function NavList({ role, onNavigate }: { role: Role; onNavigate?: () => void }) 
           </Link>
         );
       })}
+      <button
+        type="button"
+        onClick={logout}
+        className="mt-4 flex items-center gap-3 rounded-md border-t px-3 pt-4 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent"
+      >
+        <LogOut className="size-4 shrink-0" />
+        Log out
+      </button>
     </nav>
   );
 }

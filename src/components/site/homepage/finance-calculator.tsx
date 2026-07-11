@@ -24,7 +24,7 @@ export function FinanceCalculator() {
   }, [price, downPayment, apr, termMonths]);
 
   return (
-    <Section tone="light">
+    <Section tone="light" className="bg-[#eff1f3]">
       <h2 className="font-heading mb-6 text-2xl tracking-tight">
         Calculadora de Financiación
       </h2>

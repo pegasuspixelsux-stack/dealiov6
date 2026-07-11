@@ -63,7 +63,7 @@ export function TradeIn() {
 
   if (submitted) {
     return (
-      <Section tone="light">
+      <Section tone="light" className="bg-[#edf2fb]">
         <div className="mx-auto max-w-xl text-center">
           <h2 className="font-heading text-2xl tracking-tight">
             ¡Gracias! Nos pondremos en contacto.
@@ -78,7 +78,7 @@ export function TradeIn() {
   }
 
   return (
-    <Section tone="light">
+    <Section tone="light" className="bg-[#edf2fb]">
       <div className="mx-auto max-w-xl">
         <h2 className="font-heading mb-2 text-2xl tracking-tight">
           Conocé el Valor de tu Vehículo

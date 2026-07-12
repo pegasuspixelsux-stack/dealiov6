@@ -1,6 +1,6 @@
 import "server-only";
 import { adminFirestore } from "@/lib/firebase/admin";
-import { leadSchema, type Lead } from "@/types";
+import { leadSchema, leadStageSchema, type Lead, type LeadStage } from "@/types";
 import type { z } from "zod";
 
 export async function getLeads(dealershipId: string): Promise<Lead[]> {
@@ -18,17 +18,26 @@ export async function getLeads(dealershipId: string): Promise<Lead[]> {
     const parsed = leadSchema.safeParse(data);
     if (!parsed.success) return [];
 
+    const stageParsed = leadStageSchema.safeParse(data.stage);
+    const stage: LeadStage = stageParsed.success ? stageParsed.data : "recibido";
+
     const createdAt: Date =
       typeof data.createdAt?.toDate === "function"
         ? data.createdAt.toDate()
         : new Date();
+    const updatedAt: Date =
+      typeof data.updatedAt?.toDate === "function"
+        ? data.updatedAt.toDate()
+        : createdAt;
 
     return [
       {
         id: doc.id,
         dealershipId,
         ...parsed.data,
+        stage,
         createdAt: createdAt.toISOString(),
+        updatedAt: updatedAt.toISOString(),
       },
     ];
   });
@@ -53,7 +62,25 @@ export async function createLead(
     ...input,
     id: ref.id,
     dealershipId,
+    stage: "recibido",
     createdAt: now,
     updatedAt: now,
   });
+}
+
+export async function updateLeadStage(
+  dealershipId: string,
+  leadId: string,
+  stage: LeadStage
+): Promise<void> {
+  if (!adminFirestore) {
+    throw new Error("Firestore is not configured.");
+  }
+
+  await adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .collection("leads")
+    .doc(leadId)
+    .update({ stage, updatedAt: new Date() });
 }

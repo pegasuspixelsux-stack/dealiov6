@@ -14,9 +14,18 @@ export const DEFAULT_LEAD_STAGE_THRESHOLDS: LeadStageThresholds = {
   followUpRedDays: 7,
 };
 
-export const leadStageThresholdsSchema = z.object({
-  fastStageYellowMinutes: z.number().positive(),
-  fastStageRedMinutes: z.number().positive(),
-  followUpYellowDays: z.number().positive(),
-  followUpRedDays: z.number().positive(),
-});
+export const leadStageThresholdsSchema = z
+  .object({
+    fastStageYellowMinutes: z.number().positive(),
+    fastStageRedMinutes: z.number().positive(),
+    followUpYellowDays: z.number().positive(),
+    followUpRedDays: z.number().positive(),
+  })
+  .refine((v) => v.fastStageYellowMinutes < v.fastStageRedMinutes, {
+    message: "El umbral amarillo debe ser menor al rojo (minutos).",
+    path: ["fastStageRedMinutes"],
+  })
+  .refine((v) => v.followUpYellowDays < v.followUpRedDays, {
+    message: "El umbral amarillo debe ser menor al rojo (días).",
+    path: ["followUpRedDays"],
+  });

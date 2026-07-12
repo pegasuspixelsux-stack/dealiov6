@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 import { LEAD_STAGES, LEAD_STAGE_LABELS } from "@/types";
-import type { Lead, LeadStageThresholds } from "@/types";
-import { getLeadStaleness } from "@/lib/leads/staleness";
+import type { Lead, LeadSource, LeadStageThresholds } from "@/types";
+import { getLeadStaleness, type Staleness } from "@/lib/leads/staleness";
 import { LeadDetailModal } from "./lead-detail-modal";
 
-const STALENESS_COLORS: Record<string, string> = {
+const STALENESS_COLORS: Record<Staleness, string> = {
   green: "bg-green-500",
   yellow: "bg-yellow-500",
   red: "bg-red-500",
+};
+
+const SOURCE_LABELS: Record<LeadSource, string> = {
+  vehicle_inquiry: "Interés en vehículo",
+  trade_in: "Canje",
+  general_inquiry: "Consulta general",
 };
 
 export function PipelineBoard({
@@ -50,6 +56,9 @@ export function PipelineBoard({
                         )}
                       </div>
                       <span className="text-xs text-muted-foreground">
+                        {SOURCE_LABELS[lead.source]}
+                      </span>
+                      <span className="line-clamp-2 text-xs text-muted-foreground">
                         {lead.message}
                       </span>
                     </button>

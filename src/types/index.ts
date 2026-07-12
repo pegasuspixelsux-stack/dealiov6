@@ -1,4 +1,5 @@
 export * from "./auth";
+export * from "./brand";
 export * from "./dealership";
 export * from "./firestore";
 export * from "./lead";

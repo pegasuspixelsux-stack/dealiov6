@@ -1,8 +1,8 @@
 import { Car } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { DealershipConfig, Vehicle } from "@/types";
+import { VehicleInquiryButton } from "./vehicle-inquiry-button";
 
 export function VehicleCard({
   vehicle,
@@ -13,11 +13,6 @@ export function VehicleCard({
   dealership: DealershipConfig;
   className?: string;
 }) {
-  const message = encodeURIComponent(
-    `Hola, me interesa el ${vehicle.make} ${vehicle.model} ${vehicle.year}.`
-  );
-  const whatsappHref = `https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}?text=${message}`;
-
   return (
     <div
       className={cn(
@@ -49,11 +44,7 @@ export function VehicleCard({
           <p className="text-xl font-semibold text-white">
             ${vehicle.price.toLocaleString()}
           </p>
-          <Button
-            size="sm"
-            className="bg-white text-[#0d0d0d] hover:bg-white/80"
-            render={<a href={whatsappHref}>Consultar</a>}
-          />
+          <VehicleInquiryButton vehicle={vehicle} dealership={dealership} />
         </div>
       </div>
     </div>

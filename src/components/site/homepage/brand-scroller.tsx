@@ -1,24 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Section } from "./section";
+import type { Brand } from "@/types";
 
-const BRANDS = [
-  { label: "Toyota" },
-  { label: "Honda" },
-  { label: "Ford" },
-  { label: "Chevrolet" },
-  { label: "BMW" },
-  { label: "Mercedes-Benz" },
-  { label: "Audi" },
-  { label: "Volkswagen" },
-  { label: "Nissan" },
-  { label: "Hyundai" },
-];
-
-export function BrandScroller() {
+export function BrandScroller({ brands }: { brands: Brand[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -30,6 +19,8 @@ export function BrandScroller() {
       behavior: "smooth",
     });
   };
+
+  if (brands.length === 0) return null;
 
   return (
     <Section tone="light">
@@ -60,22 +51,22 @@ export function BrandScroller() {
         ref={scrollerRef}
         className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto"
       >
-        {BRANDS.map((brand) => (
+        {brands.map((brand) => (
           <Link
-            key={brand.label}
-            href={`/inventory?make=${encodeURIComponent(brand.label)}`}
+            key={brand.id}
+            href={`/inventory?make=${encodeURIComponent(brand.name)}`}
             className="group flex h-40 w-48 shrink-0 snap-start flex-col items-center justify-center gap-3 bg-white p-4 text-center transition-colors hover:bg-[var(--ultima-surface-container)]"
           >
-            <span className="flex size-14 items-center justify-center rounded-full border border-[#0d0d0d]/15 font-heading text-lg text-[#0d0d0d]/60 transition-colors group-hover:border-[#0d0d0d]/40 group-hover:text-[#0d0d0d]">
-              {brand.label
-                .split(/[\s-]+/)
-                .map((word) => word.charAt(0))
-                .slice(0, 2)
-                .join("")
-                .toUpperCase()}
-            </span>
+            <div className="relative size-14">
+              <Image
+                src={brand.logoUrl}
+                alt={brand.name}
+                fill
+                className="object-contain"
+              />
+            </div>
             <span className="font-heading text-sm tracking-wide text-[#0d0d0d]">
-              {brand.label}
+              {brand.name}
             </span>
           </Link>
         ))}

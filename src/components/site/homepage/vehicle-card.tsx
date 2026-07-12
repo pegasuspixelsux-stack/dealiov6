@@ -42,6 +42,14 @@ export function VehicleCard({
           />
         </div>
       )}
+      {!overlay && (
+        <div className="absolute top-3 right-3 text-right">
+          <p className="text-xs text-[#0d0d0d]/70">A partir de</p>
+          <p className="text-xl font-semibold text-[#0d0d0d]">
+            ${vehicle.price.toLocaleString("es-AR")}
+          </p>
+        </div>
+      )}
       <div
         className={cn(
           "absolute inset-x-0 bottom-0 p-4",
@@ -60,17 +68,12 @@ export function VehicleCard({
           {vehicle.mileage.toLocaleString()} km ·{" "}
           {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
-        <div className="mt-3 flex items-center justify-between gap-3">
-          <p
-            className={cn(
-              "text-xl font-semibold",
-              overlay ? "text-white" : "text-[#0d0d0d]"
-            )}
-          >
-            {overlay
-              ? `$${vehicle.price.toLocaleString()}`
-              : `Desde $${vehicle.price.toLocaleString("es-AR")}`}
-          </p>
+        <div className={cn("mt-3 flex items-center gap-3", overlay ? "justify-between" : "justify-end")}>
+          {overlay && (
+            <p className="text-xl font-semibold text-white">
+              ${vehicle.price.toLocaleString()}
+            </p>
+          )}
           <VehicleInquiryButton
             vehicle={vehicle}
             dealership={dealership}

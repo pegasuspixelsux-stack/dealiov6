@@ -17,8 +17,10 @@ export default async function HomePage() {
   const dealership = getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
-  const vehicles = await getVehicles(dealership.id);
-  const brands = await getBrands(dealership.id);
+  const [vehicles, brands] = await Promise.all([
+    getVehicles(dealership.id),
+    getBrands(dealership.id),
+  ]);
 
   return (
     <>

@@ -30,8 +30,16 @@ export function VehicleCard({
           className="object-cover"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-950">
-          <Car className="size-12 text-white/20" strokeWidth={1} />
+        <div
+          className={cn(
+            "absolute inset-0 flex items-center justify-center",
+            overlay && "bg-gradient-to-br from-neutral-800 to-neutral-950"
+          )}
+        >
+          <Car
+            className={cn("size-12", overlay ? "text-white/20" : "text-[#0d0d0d]/20")}
+            strokeWidth={1}
+          />
         </div>
       )}
       <div
@@ -42,8 +50,8 @@ export function VehicleCard({
       >
         <h3
           className={cn(
-            "font-heading text-lg tracking-wide",
-            overlay ? "text-white" : "text-[#0d0d0d]"
+            "font-heading tracking-wide",
+            overlay ? "text-lg text-white" : "mt-2 text-sm text-[#0d0d0d]"
           )}
         >
           {vehicle.make} {vehicle.model} {vehicle.year}

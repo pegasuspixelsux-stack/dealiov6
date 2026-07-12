@@ -13,7 +13,11 @@ export async function getVehicles(dealershipId: string): Promise<Vehicle[]> {
     .orderBy("createdAt", "desc")
     .get();
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Vehicle);
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    dealershipId,
+    ...vehicleSchema.parse(doc.data()),
+  }));
 }
 
 export function reserveVehicleId(dealershipId: string): string {

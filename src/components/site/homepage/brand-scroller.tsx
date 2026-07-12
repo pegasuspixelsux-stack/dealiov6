@@ -55,19 +55,14 @@ export function BrandScroller({ brands }: { brands: Brand[] }) {
           <Link
             key={brand.id}
             href={`/inventory?make=${encodeURIComponent(brand.name)}`}
-            className="group flex h-40 w-48 shrink-0 snap-start flex-col items-center justify-center gap-3 bg-white p-4 text-center transition-colors hover:bg-[var(--ultima-surface-container)]"
+            className="group relative h-40 w-48 shrink-0 snap-start overflow-hidden bg-white transition-colors hover:bg-[var(--ultima-surface-container)]"
           >
-            <div className="relative size-14">
-              <Image
-                src={brand.logoUrl}
-                alt={brand.name}
-                fill
-                className="object-contain"
-              />
-            </div>
-            <span className="font-heading text-sm tracking-wide text-[#0d0d0d]">
-              {brand.name}
-            </span>
+            <Image
+              src={brand.logoUrl}
+              alt={brand.name}
+              fill
+              className="object-contain p-4"
+            />
           </Link>
         ))}
       </div>

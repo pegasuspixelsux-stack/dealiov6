@@ -4,6 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createLeadAction } from "@/app/actions/leads";
 
 interface TradeInFormState {
   year: string;
@@ -36,7 +37,7 @@ function validate(state: TradeInFormState): string | null {
   return null;
 }
 
-export function TradeIn() {
+export function TradeIn({ dealershipId }: { dealershipId: string }) {
   const [form, setForm] = useState<TradeInFormState>(INITIAL_STATE);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -47,17 +48,30 @@ export function TradeIn() {
     };
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const validationError = validate(form);
     if (validationError) {
       setError(validationError);
       return;
     }
-    // Placeholder submission: no Lead model/Firestore write exists yet.
-    // A future Leads feature wires this into a real Lead record.
     setError(null);
-    setSubmitted(true);
+    try {
+      const result = await createLeadAction({
+        dealershipId,
+        source: "trade_in",
+        name: form.name,
+        contact: form.email,
+        message: `${form.year} ${form.make} ${form.model}, ${form.mileage} km`,
+      });
+      if (!result.success) {
+        setError("Algo salió mal. Por favor intentá de nuevo.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Algo salió mal. Por favor intentá de nuevo.");
+    }
   }
 
   if (submitted) {

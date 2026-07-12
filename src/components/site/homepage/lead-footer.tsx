@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { createLeadAction } from "@/app/actions/leads";
 
 interface LeadFormState {
   name: string;
@@ -26,7 +27,7 @@ function validate(state: LeadFormState): string | null {
   return null;
 }
 
-export function LeadFooter() {
+export function LeadFooter({ dealershipId }: { dealershipId: string }) {
   const [form, setForm] = useState<LeadFormState>(INITIAL_STATE);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -39,17 +40,30 @@ export function LeadFooter() {
     };
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const validationError = validate(form);
     if (validationError) {
       setError(validationError);
       return;
     }
-    // Placeholder submission: no Lead model/Firestore write exists yet.
-    // A future Leads feature wires this into a real Lead record.
     setError(null);
-    setSubmitted(true);
+    try {
+      const result = await createLeadAction({
+        dealershipId,
+        source: "general_inquiry",
+        name: form.name,
+        contact: form.phone,
+        message: form.message || "Consulta general",
+      });
+      if (!result.success) {
+        setError("Algo salió mal. Por favor intentá de nuevo.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Algo salió mal. Por favor intentá de nuevo.");
+    }
   }
 
   return (

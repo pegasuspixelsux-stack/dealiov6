@@ -26,8 +26,8 @@ export default async function HomePage() {
       <About dealership={dealership} />
       <InventoryGrid dealership={dealership} vehicles={vehicles} />
       <FinanceCalculator />
-      <TradeInSection />
-      <LeadTestimonials />
+      <TradeInSection dealershipId={dealership.id} />
+      <LeadTestimonials dealershipId={dealership.id} />
       <WhatsAppFab dealership={dealership} />
     </>
   );

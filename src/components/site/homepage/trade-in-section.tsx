@@ -1,7 +1,7 @@
 import { Section } from "./section";
 import { TradeIn } from "./trade-in";
 
-export function TradeInSection() {
+export function TradeInSection({ dealershipId }: { dealershipId: string }) {
   return (
     <Section tone="light">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
@@ -23,7 +23,7 @@ export function TradeInSection() {
             Contanos sobre tu vehículo actual y te enviaremos una
             estimación.
           </p>
-          <TradeIn />
+          <TradeIn dealershipId={dealershipId} />
         </div>
       </div>
     </Section>

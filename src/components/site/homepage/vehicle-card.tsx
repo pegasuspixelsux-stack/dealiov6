@@ -67,7 +67,9 @@ export function VehicleCard({
               overlay ? "text-white" : "text-[#0d0d0d]"
             )}
           >
-            ${vehicle.price.toLocaleString()}
+            {overlay
+              ? `$${vehicle.price.toLocaleString()}`
+              : `Desde $${vehicle.price.toLocaleString("es-AR")}`}
           </p>
           <VehicleInquiryButton
             vehicle={vehicle}

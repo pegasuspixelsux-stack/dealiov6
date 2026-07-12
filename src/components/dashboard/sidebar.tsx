@@ -11,6 +11,7 @@ import {
   Settings,
   LogOut,
   Menu,
+  Kanban,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,6 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, visible: () => true },
   { href: "/dashboard/inventory", label: "Inventory", icon: Car, visible: () => true },
   { href: "/dashboard/leads", label: "Leads", icon: Users, visible: () => true },
+  { href: "/dashboard/pipeline", label: "Pipeline", icon: Kanban, visible: () => true },
   { href: "/dashboard/reports", label: "Reports", icon: BarChart3, visible: () => true },
   {
     href: "/dashboard/salespeople",

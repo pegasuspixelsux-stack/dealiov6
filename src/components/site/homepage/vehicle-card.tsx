@@ -37,9 +37,7 @@ export function VehicleCard({
       <div
         className={cn(
           "absolute inset-x-0 bottom-0 p-4",
-          overlay
-            ? "bg-gradient-to-t from-black/85 via-black/50 to-transparent"
-            : "bg-white"
+          overlay && "bg-gradient-to-t from-black/85 via-black/50 to-transparent"
         )}
       >
         <h3

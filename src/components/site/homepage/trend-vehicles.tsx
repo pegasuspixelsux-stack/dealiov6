@@ -11,7 +11,7 @@ export function TrendVehicles({
   dealership: DealershipConfig;
   vehicles: Vehicle[];
 }) {
-  const featured = vehicles.filter((vehicle) => vehicle.featured);
+  const featured = vehicles.filter((vehicle) => vehicle.category === "new");
 
   return (
     <Section tone="light">

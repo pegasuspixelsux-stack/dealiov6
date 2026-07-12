@@ -17,9 +17,11 @@ import type { DealershipConfig, Vehicle } from "@/types";
 export function VehicleInquiryButton({
   vehicle,
   dealership,
+  dark = false,
 }: {
   vehicle: Vehicle;
   dealership: DealershipConfig;
+  dark?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -63,7 +65,14 @@ export function VehicleInquiryButton({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="sm" className="bg-white text-[#0d0d0d] hover:bg-white/80">
+          <Button
+            size="sm"
+            className={
+              dark
+                ? "bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80"
+                : "bg-white text-[#0d0d0d] hover:bg-white/80"
+            }
+          >
             Consultar
           </Button>
         }

@@ -8,10 +8,12 @@ export function VehicleCard({
   vehicle,
   dealership,
   className,
+  overlay = true,
 }: {
   vehicle: Vehicle;
   dealership: DealershipConfig;
   className?: string;
+  overlay?: boolean;
 }) {
   return (
     <div
@@ -32,19 +34,40 @@ export function VehicleCard({
           <Car className="size-12 text-white/20" strokeWidth={1} />
         </div>
       )}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4">
-        <h3 className="font-heading text-lg tracking-wide text-white">
+      <div
+        className={cn(
+          "absolute inset-x-0 bottom-0 p-4",
+          overlay
+            ? "bg-gradient-to-t from-black/85 via-black/50 to-transparent"
+            : "bg-white"
+        )}
+      >
+        <h3
+          className={cn(
+            "font-heading text-lg tracking-wide",
+            overlay ? "text-white" : "text-[#0d0d0d]"
+          )}
+        >
           {vehicle.make} {vehicle.model} {vehicle.year}
         </h3>
-        <p className="text-sm text-white/70">
+        <p className={cn("text-sm", overlay ? "text-white/70" : "text-[#0d0d0d]/70")}>
           {vehicle.mileage.toLocaleString()} km ·{" "}
           {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
         <div className="mt-3 flex items-center justify-between gap-3">
-          <p className="text-xl font-semibold text-white">
+          <p
+            className={cn(
+              "text-xl font-semibold",
+              overlay ? "text-white" : "text-[#0d0d0d]"
+            )}
+          >
             ${vehicle.price.toLocaleString()}
           </p>
-          <VehicleInquiryButton vehicle={vehicle} dealership={dealership} />
+          <VehicleInquiryButton
+            vehicle={vehicle}
+            dealership={dealership}
+            dark={!overlay}
+          />
         </div>
       </div>
     </div>

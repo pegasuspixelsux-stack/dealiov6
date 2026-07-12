@@ -16,15 +16,16 @@ export function TrendVehicles({
   return (
     <Section tone="light">
       <h2 className="font-heading mb-6 text-2xl tracking-tight">
-        Vehículos Nuevos
+        Vehículos 0km
       </h2>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto">
         {featured.map((vehicle) => (
           <VehicleCard
             key={vehicle.id}
             vehicle={vehicle}
             dealership={dealership}
-            className="rounded-[12px]"
+            className="w-72 shrink-0 snap-start rounded-[12px]"
+            overlay={false}
           />
         ))}
       </div>

@@ -28,6 +28,7 @@ export default async function LeadsPage() {
               <th className="py-2 pr-4">Contacto</th>
               <th className="py-2 pr-4">Origen</th>
               <th className="py-2 pr-4">Mensaje</th>
+              <th className="py-2 pr-4">Fecha</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,9 @@ export default async function LeadsPage() {
                 <td className="py-2 pr-4">{lead.contact}</td>
                 <td className="py-2 pr-4">{SOURCE_LABELS[lead.source]}</td>
                 <td className="py-2 pr-4">{lead.message}</td>
+                <td className="py-2 pr-4">
+                  {new Date(lead.createdAt).toLocaleDateString()}
+                </td>
               </tr>
             ))}
           </tbody>

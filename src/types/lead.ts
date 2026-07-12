@@ -9,6 +9,7 @@ export interface Lead {
   name: string;
   contact: string;
   message: string;
+  createdAt: string;
 }
 
 export const leadSchema = z.object({

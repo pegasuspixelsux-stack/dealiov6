@@ -13,7 +13,25 @@ export async function getLeads(dealershipId: string): Promise<Lead[]> {
     .orderBy("createdAt", "desc")
     .get();
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }) as Lead);
+  return snapshot.docs.flatMap((doc) => {
+    const data = doc.data();
+    const parsed = leadSchema.safeParse(data);
+    if (!parsed.success) return [];
+
+    const createdAt: Date =
+      typeof data.createdAt?.toDate === "function"
+        ? data.createdAt.toDate()
+        : new Date();
+
+    return [
+      {
+        id: doc.id,
+        dealershipId,
+        ...parsed.data,
+        createdAt: createdAt.toISOString(),
+      },
+    ];
+  });
 }
 
 export async function createLead(

@@ -1,5 +1,6 @@
 import "server-only";
 import { adminFirestore } from "@/lib/firebase/admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { vehicleSchema, type Vehicle } from "@/types";
 import type { z } from "zod";
 
@@ -14,9 +15,33 @@ export async function getVehicles(dealershipId: string): Promise<Vehicle[]> {
     .get();
 
   return snapshot.docs.flatMap((doc) => {
-    const parsed = vehicleSchema.safeParse(doc.data());
+    const data = doc.data();
+    const parsed = vehicleSchema.safeParse(data);
     if (!parsed.success) return [];
-    return [{ id: doc.id, dealershipId, ...parsed.data }];
+
+    const createdAt: Date =
+      typeof data.createdAt?.toDate === "function"
+        ? data.createdAt.toDate()
+        : new Date();
+    const updatedAt: Date =
+      typeof data.updatedAt?.toDate === "function"
+        ? data.updatedAt.toDate()
+        : createdAt;
+    const soldAt: string | undefined =
+      typeof data.soldAt?.toDate === "function"
+        ? data.soldAt.toDate().toISOString()
+        : undefined;
+
+    return [
+      {
+        id: doc.id,
+        dealershipId,
+        ...parsed.data,
+        createdAt: createdAt.toISOString(),
+        updatedAt: updatedAt.toISOString(),
+        soldAt,
+      },
+    ];
   });
 }
 
@@ -54,6 +79,7 @@ export async function createVehicle(
       dealershipId,
       createdAt: now,
       updatedAt: now,
+      ...(input.status === "vendido" ? { soldAt: now } : {}),
     });
 }
 
@@ -66,13 +92,30 @@ export async function updateVehicle(
     throw new Error("Firestore is not configured.");
   }
 
-  await adminFirestore
+  const ref = adminFirestore
     .collection("dealerships")
     .doc(dealershipId)
     .collection("vehicles")
-    .doc(vehicleId)
-    .set(
-      { ...input, id: vehicleId, dealershipId, updatedAt: new Date() },
-      { merge: true }
-    );
+    .doc(vehicleId);
+
+  const existing = await ref.get();
+  const existingData = existing.data();
+  const wasAlreadySold =
+    existingData?.status === "vendido" && Boolean(existingData?.soldAt);
+
+  const soldAtUpdate =
+    input.status === "vendido"
+      ? { soldAt: wasAlreadySold ? existingData!.soldAt : new Date() }
+      : { soldAt: FieldValue.delete() };
+
+  await ref.set(
+    {
+      ...input,
+      id: vehicleId,
+      dealershipId,
+      updatedAt: new Date(),
+      ...soldAtUpdate,
+    },
+    { merge: true }
+  );
 }

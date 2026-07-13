@@ -34,6 +34,9 @@ export interface Vehicle {
   color: string;
   bodyType: BodyType;
   monthlyPayment?: number;
+  createdAt: string;
+  updatedAt: string;
+  soldAt?: string;
 }
 
 export const vehicleSchema = z.object({

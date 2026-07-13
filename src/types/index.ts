@@ -2,6 +2,7 @@ export * from "./auth";
 export * from "./brand";
 export * from "./dealership";
 export * from "./firestore";
+export * from "./inventory-settings";
 export * from "./lead";
 export * from "./lead-stage-thresholds";
 export * from "./user";

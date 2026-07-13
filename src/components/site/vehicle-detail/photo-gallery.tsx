@@ -56,9 +56,16 @@ export function PhotoGallery({
         onClick={() => setViewerOpen(true)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="relative aspect-video w-full overflow-hidden rounded-xl bg-neutral-100"
+        className="relative w-full overflow-hidden rounded-xl bg-neutral-100"
       >
-        <Image src={images[activeIndex]} alt={alt} fill className="object-contain" />
+        <Image
+          src={images[activeIndex]}
+          alt={alt}
+          width={1600}
+          height={900}
+          className="h-auto w-full"
+          style={{ aspectRatio: "auto" }}
+        />
       </button>
       {images.length > 1 && (
         <div className="flex gap-2 overflow-x-auto">

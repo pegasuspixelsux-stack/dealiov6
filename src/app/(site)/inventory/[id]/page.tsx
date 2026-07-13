@@ -45,12 +45,12 @@ export default async function VehicleDetailPage(
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-3">
             <h1 className="font-heading text-3xl tracking-tight">
-              {vehicle.make} {vehicle.model} {vehicle.version} {vehicle.year}
+              {vehicle.year} {vehicle.make} {vehicle.model} {vehicle.version}
             </h1>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#0d0d0d]/70">
+              <span>{vehicle.year}</span>
               <span>{vehicle.make}</span>
               <span>{vehicle.model}</span>
-              <span>{vehicle.year}</span>
               <span>{vehicle.mileage.toLocaleString()} km</span>
               <span>{FUEL_LABELS[vehicle.fuel]}</span>
               <span>{TRANSMISSION_LABELS[vehicle.transmission]}</span>

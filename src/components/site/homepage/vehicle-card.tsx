@@ -69,7 +69,7 @@ export function VehicleCard({
             overlay ? "text-lg text-white" : "mt-2 text-sm text-[#0d0d0d]"
           )}
         >
-          {vehicle.make} {vehicle.model} {vehicle.year}
+          {vehicle.year} {vehicle.make} {vehicle.model}
         </h3>
         <p className={cn("text-sm", overlay ? "text-white/70" : "text-[#0d0d0d]/70")}>
           {vehicle.mileage.toLocaleString()} km ·{" "}

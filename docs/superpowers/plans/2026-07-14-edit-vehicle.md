@@ -310,6 +310,24 @@ export function EditVehicleModal({ vehicle }: { vehicle: Vehicle }) {
     setKeptPhotos((current) => current.filter((u) => u !== url));
   }
 
+  // Correction (found during this plan's final whole-branch review, applied
+  // after Task 3's code was written): the outer EditVehicleModal never
+  // unmounts — only DialogContent does, on close — so keptPhotos (plain
+  // React state here) silently carried stale removals/omitted-additions
+  // across separate edit sessions for the same vehicle. A routine
+  // edit-the-same-car-twice workflow could detach photos added in an
+  // earlier edit. Fixed by resyncing keptPhotos (and clearing any stale
+  // error) from vehicle.imageUrls whenever the dialog opens:
+  function handleOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen);
+    if (nextOpen) {
+      setKeptPhotos(vehicle.imageUrls);
+      setError(null);
+    }
+  }
+  // ...and use `<Dialog open={open} onOpenChange={handleOpenChange}>`
+  // instead of `onOpenChange={setOpen}` in the JSX below.
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);

@@ -11,6 +11,8 @@ export async function createLeadAction(input: {
   name: string;
   contact: string;
   message: string;
+  email?: string;
+  preferredContact?: string;
 }): Promise<{ success: true } | { success: false; error: string }> {
   const parsed = leadSchema.safeParse(input);
   if (!parsed.success) {

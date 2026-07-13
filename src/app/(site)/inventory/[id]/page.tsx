@@ -5,6 +5,7 @@ import { getVehicles } from "@/lib/vehicles/vehicles";
 import { Section } from "@/components/site/homepage/section";
 import { VehicleInquiryButton } from "@/components/site/homepage/vehicle-inquiry-button";
 import { PhotoGallery } from "@/components/site/vehicle-detail/photo-gallery";
+import { VehicleContactForm } from "@/components/site/vehicle-detail/vehicle-contact-form";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/format-price";
 import {
@@ -100,8 +101,9 @@ export default async function VehicleDetailPage(
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           <VehicleInquiryButton vehicle={vehicle} dealership={dealership} dark />
+          <VehicleContactForm vehicle={vehicle} dealership={dealership} />
         </div>
       </div>
     </Section>

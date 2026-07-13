@@ -27,6 +27,18 @@ export function EditVehicleModal({ vehicle }: { vehicle: Vehicle }) {
     setKeptPhotos((current) => current.filter((u) => u !== url));
   }
 
+  function handleOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen);
+    if (nextOpen) {
+      // DialogContent unmounts on close, so its defaultValue-based fields
+      // reset automatically — but this outer component never unmounts, so
+      // keptPhotos (plain React state) would otherwise carry stale removals
+      // and additions across separate edit sessions for the same vehicle.
+      setKeptPhotos(vehicle.imageUrls);
+      setError(null);
+    }
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);
@@ -51,7 +63,7 @@ export function EditVehicleModal({ vehicle }: { vehicle: Vehicle }) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger render={<Button size="sm" variant="outline">Edit</Button>} />
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>

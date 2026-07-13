@@ -139,6 +139,9 @@ export async function updateVehicleAction(
   if (imageUrls.length > 8) {
     return { success: false, error: "Maximum 8 photos." };
   }
+  if (!imageUrls.every((url) => vehicleSchema.shape.imageUrls.element.safeParse(url).success)) {
+    return { success: false, error: "Please check the form fields and try again." };
+  }
 
   await updateVehicle(session.dealershipId, vehicleId, {
     ...fieldsParsed.data,

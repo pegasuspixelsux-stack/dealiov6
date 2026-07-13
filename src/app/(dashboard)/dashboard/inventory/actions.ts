@@ -29,6 +29,12 @@ export async function createVehicleAction(
     return { success: false, error: "Maximum 8 photos." };
   }
 
+  const monthlyPaymentRaw = formData.get("monthlyPayment");
+  const monthlyPayment =
+    typeof monthlyPaymentRaw === "string" && monthlyPaymentRaw.trim() !== ""
+      ? Number(monthlyPaymentRaw)
+      : undefined;
+
   const fieldsParsed = vehicleSchema
     .omit({ imageUrls: true })
     .safeParse({
@@ -49,6 +55,7 @@ export async function createVehicleAction(
       features: formData.getAll("features"),
       color: formData.get("color") ?? "",
       bodyType: formData.get("bodyType"),
+      monthlyPayment,
     });
 
   if (!fieldsParsed.success) {

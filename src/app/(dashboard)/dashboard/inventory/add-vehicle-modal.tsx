@@ -73,6 +73,10 @@ export function AddVehicleModal() {
               <Input id="av-price" name="price" type="number" required />
             </div>
             <div className="flex flex-col gap-2">
+              <Label htmlFor="av-monthly-payment">Monthly Payment (US$, optional)</Label>
+              <Input id="av-monthly-payment" name="monthlyPayment" type="number" />
+            </div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="av-mileage">Mileage</Label>
               <Input id="av-mileage" name="mileage" type="number" required />
             </div>

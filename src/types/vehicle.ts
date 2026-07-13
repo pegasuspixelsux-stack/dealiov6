@@ -33,6 +33,7 @@ export interface Vehicle {
   features: string[];
   color: string;
   bodyType: BodyType;
+  monthlyPayment?: number;
 }
 
 export const vehicleSchema = z.object({
@@ -56,6 +57,7 @@ export const vehicleSchema = z.object({
   bodyType: z
     .enum(["sedan", "suv", "hatchback", "pickup", "coupe", "furgon"])
     .default("sedan"),
+  monthlyPayment: z.number().positive().optional(),
 });
 
 export const FUEL_LABELS: Record<Fuel, string> = {

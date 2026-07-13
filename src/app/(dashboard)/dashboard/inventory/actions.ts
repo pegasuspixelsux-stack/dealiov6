@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { verifySession } from "@/lib/auth/dal";
 import { can } from "@/lib/auth/permissions";
-import { reserveVehicleId, createVehicle } from "@/lib/vehicles/vehicles";
+import { reserveVehicleId, createVehicle, updateVehicle } from "@/lib/vehicles/vehicles";
 import { uploadVehiclePhotos } from "@/lib/vehicles/upload-photos";
 import { vehicleSchema } from "@/types";
 
@@ -71,5 +71,82 @@ export async function createVehicleAction(
 
   revalidatePath("/dashboard/inventory");
   revalidatePath("/inventory");
+  return { success: true };
+}
+
+export async function updateVehicleAction(
+  vehicleId: string,
+  formData: FormData
+): Promise<{ success: true } | { success: false; error: string }> {
+  const session = await verifySession();
+  if (!session) {
+    return { success: false, error: "Not signed in." };
+  }
+  if (!can(session.role, "canManageVehicles")) {
+    return { success: false, error: "You don't have permission to edit vehicles." };
+  }
+
+  const existingImageUrls = formData
+    .getAll("existingImageUrls")
+    .filter((v): v is string => typeof v === "string" && v.length > 0);
+
+  const newPhotos = formData
+    .getAll("newPhotos")
+    .filter((f): f is File => f instanceof File && f.size > 0);
+
+  const monthlyPaymentRaw = formData.get("monthlyPayment");
+  const monthlyPayment =
+    typeof monthlyPaymentRaw === "string" && monthlyPaymentRaw.trim() !== ""
+      ? Number(monthlyPaymentRaw)
+      : undefined;
+
+  const fieldsParsed = vehicleSchema
+    .omit({ imageUrls: true })
+    .safeParse({
+      make: formData.get("make"),
+      model: formData.get("model"),
+      year: Number(formData.get("year")),
+      price: Number(formData.get("price")),
+      mileage: Number(formData.get("mileage")),
+      category: formData.get("category"),
+      featured: formData.get("featured") === "on",
+      version: formData.get("version") ?? "",
+      fuel: formData.get("fuel"),
+      transmission: formData.get("transmission"),
+      location: formData.get("location") ?? "",
+      financingAvailable: formData.get("financingAvailable") === "on",
+      status: formData.get("status"),
+      description: formData.get("description") ?? "",
+      features: formData.getAll("features"),
+      color: formData.get("color") ?? "",
+      bodyType: formData.get("bodyType"),
+      monthlyPayment,
+    });
+
+  if (!fieldsParsed.success) {
+    return { success: false, error: "Please check the form fields and try again." };
+  }
+
+  const newImageUrls =
+    newPhotos.length > 0
+      ? await uploadVehiclePhotos(session.dealershipId, vehicleId, newPhotos)
+      : [];
+  const imageUrls = [...existingImageUrls, ...newImageUrls];
+
+  if (imageUrls.length === 0) {
+    return { success: false, error: "At least one photo is required." };
+  }
+  if (imageUrls.length > 8) {
+    return { success: false, error: "Maximum 8 photos." };
+  }
+
+  await updateVehicle(session.dealershipId, vehicleId, {
+    ...fieldsParsed.data,
+    imageUrls,
+  });
+
+  revalidatePath("/dashboard/inventory");
+  revalidatePath("/inventory");
+  revalidatePath(`/inventory/${vehicleId}`);
   return { success: true };
 }

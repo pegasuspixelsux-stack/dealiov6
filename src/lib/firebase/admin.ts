@@ -30,7 +30,14 @@ if (serviceAccount) {
       });
   adminAuth = getAuth(adminApp);
   adminFirestore = getFirestore(adminApp);
-  adminFirestore.settings({ ignoreUndefinedProperties: true });
+  try {
+    adminFirestore.settings({ ignoreUndefinedProperties: true });
+  } catch {
+    // Next.js re-evaluates this module per route bundle, but the
+    // underlying Firestore singleton (keyed off the shared Firebase app
+    // registry) persists across those evaluations within the same
+    // process, so settings() can already be applied — safe to ignore.
+  }
   adminStorage = getStorage(adminApp);
 } else if (process.env.NODE_ENV !== "production") {
   console.warn(

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Car } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { formatPrice } from "@/lib/format-price";
+import { formatPrice, formatMonthlyPayment } from "@/lib/format-price";
 import type { DealershipConfig, Vehicle } from "@/types";
 import { VehicleInquiryButton } from "./vehicle-inquiry-button";
 
@@ -51,10 +51,23 @@ export function VehicleCard({
       )}
       {!overlay && (
         <div className="absolute top-3 right-3 text-right">
-          <p className="text-xs text-[#0d0d0d]/70">A partir de</p>
-          <p className="text-xl font-semibold text-[#0d0d0d]">
-            {formatPrice(vehicle.price)}
-          </p>
+          {vehicle.monthlyPayment ? (
+            <>
+              <p className="text-xl font-semibold text-[#0d0d0d]">
+                {formatMonthlyPayment(vehicle.monthlyPayment)}
+              </p>
+              <p className="text-xs text-[#0d0d0d]/70">
+                {formatPrice(vehicle.price)}
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-xs text-[#0d0d0d]/70">A partir de</p>
+              <p className="text-xl font-semibold text-[#0d0d0d]">
+                {formatPrice(vehicle.price)}
+              </p>
+            </>
+          )}
         </div>
       )}
       <div
@@ -82,9 +95,22 @@ export function VehicleCard({
           )}
         >
           {overlay && (
-            <p className="text-xl font-semibold text-white">
-              {formatPrice(vehicle.price)}
-            </p>
+            <div>
+              {vehicle.monthlyPayment ? (
+                <>
+                  <p className="text-xl font-semibold text-white">
+                    {formatMonthlyPayment(vehicle.monthlyPayment)}
+                  </p>
+                  <p className="text-xs text-white/70">
+                    {formatPrice(vehicle.price)}
+                  </p>
+                </>
+              ) : (
+                <p className="text-xl font-semibold text-white">
+                  {formatPrice(vehicle.price)}
+                </p>
+              )}
+            </div>
           )}
           <VehicleInquiryButton
             vehicle={vehicle}

@@ -7,7 +7,7 @@ import { VehicleInquiryButton } from "@/components/site/homepage/vehicle-inquiry
 import { PhotoGallery } from "@/components/site/vehicle-detail/photo-gallery";
 import { VehicleContactForm } from "@/components/site/vehicle-detail/vehicle-contact-form";
 import { Badge } from "@/components/ui/badge";
-import { formatPrice } from "@/lib/format-price";
+import { formatPrice, formatMonthlyPayment } from "@/lib/format-price";
 import {
   FUEL_LABELS,
   TRANSMISSION_LABELS,
@@ -63,9 +63,20 @@ export default async function VehicleDetailPage(
               {vehicle.financingAvailable && (
                 <Badge variant="outline">Financiación disponible</Badge>
               )}
-              <span className="font-heading text-2xl text-[#0d0d0d]">
-                {formatPrice(vehicle.price)}
-              </span>
+              {vehicle.monthlyPayment ? (
+                <div>
+                  <p className="font-heading text-2xl text-[#0d0d0d]">
+                    {formatMonthlyPayment(vehicle.monthlyPayment)}
+                  </p>
+                  <p className="text-sm text-[#0d0d0d]/70">
+                    {formatPrice(vehicle.price)}
+                  </p>
+                </div>
+              ) : (
+                <span className="font-heading text-2xl text-[#0d0d0d]">
+                  {formatPrice(vehicle.price)}
+                </span>
+              )}
             </div>
           </div>
 

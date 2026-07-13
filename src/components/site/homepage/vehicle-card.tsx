@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { Car } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { formatPrice } from "@/lib/format-price";
 import type { DealershipConfig, Vehicle } from "@/types";
 import { VehicleInquiryButton } from "./vehicle-inquiry-button";
 
@@ -16,9 +18,10 @@ export function VehicleCard({
   overlay?: boolean;
 }) {
   return (
-    <div
+    <Link
+      href={`/inventory/${vehicle.id}`}
       className={cn(
-        "group relative aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
+        "group relative block aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
         className
       )}
     >
@@ -46,7 +49,7 @@ export function VehicleCard({
         <div className="absolute top-3 right-3 text-right">
           <p className="text-xs text-[#0d0d0d]/70">A partir de</p>
           <p className="text-xl font-semibold text-[#0d0d0d]">
-            ${vehicle.price.toLocaleString("es-AR")}
+            {formatPrice(vehicle.price)}
           </p>
         </div>
       )}
@@ -71,16 +74,18 @@ export function VehicleCard({
         <div className={cn("mt-3 flex items-center gap-3", overlay ? "justify-between" : "justify-end")}>
           {overlay && (
             <p className="text-xl font-semibold text-white">
-              ${vehicle.price.toLocaleString()}
+              {formatPrice(vehicle.price)}
             </p>
           )}
-          <VehicleInquiryButton
-            vehicle={vehicle}
-            dealership={dealership}
-            dark={!overlay}
-          />
+          <div onClick={(event) => event.stopPropagation()}>
+            <VehicleInquiryButton
+              vehicle={vehicle}
+              dealership={dealership}
+              dark={!overlay}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

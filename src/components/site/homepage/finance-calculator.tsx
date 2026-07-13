@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Section } from "./section";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatPrice } from "@/lib/format-price";
 
 export function FinanceCalculator() {
   const [price, setPrice] = useState(50000);
@@ -32,7 +33,7 @@ export function FinanceCalculator() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-price">
-              Precio del Vehículo ($)
+              Precio del Vehículo (US$)
             </Label>
             <Input
               id="fc-price"
@@ -44,7 +45,7 @@ export function FinanceCalculator() {
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="fc-down">
-              Anticipo ($)
+              Anticipo (US$)
             </Label>
             <Input
               id="fc-down"
@@ -88,7 +89,7 @@ export function FinanceCalculator() {
             data-testid="monthly-payment"
             className="font-heading text-5xl text-[#0d0d0d]"
           >
-            ${monthlyPayment.toFixed(2)}
+            {formatPrice(Math.round(monthlyPayment))}
           </p>
         </div>
       </div>

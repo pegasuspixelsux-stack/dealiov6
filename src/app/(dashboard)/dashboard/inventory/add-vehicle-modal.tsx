@@ -11,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { VEHICLE_FEATURES } from "@/types";
 import { createVehicleAction } from "./actions";
 
 export function AddVehicleModal() {
@@ -44,7 +46,7 @@ export function AddVehicleModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Add New Car</Button>} />
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Add New Car</DialogTitle>
         </DialogHeader>
@@ -59,11 +61,15 @@ export function AddVehicleModal() {
               <Input id="av-model" name="model" required />
             </div>
             <div className="flex flex-col gap-2">
+              <Label htmlFor="av-version">Version</Label>
+              <Input id="av-version" name="version" />
+            </div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="av-year">Year</Label>
               <Input id="av-year" name="year" type="number" required />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="av-price">Price</Label>
+              <Label htmlFor="av-price">Price (US$)</Label>
               <Input id="av-price" name="price" type="number" required />
             </div>
             <div className="flex flex-col gap-2">
@@ -82,6 +88,64 @@ export function AddVehicleModal() {
                 <option value="used">Used</option>
               </select>
             </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-fuel">Fuel</Label>
+              <select
+                id="av-fuel"
+                name="fuel"
+                required
+                className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+              >
+                <option value="nafta">Nafta</option>
+                <option value="diesel">Diesel</option>
+                <option value="hibrido">Híbrido</option>
+                <option value="electrico">Eléctrico</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-transmission">Transmission</Label>
+              <select
+                id="av-transmission"
+                name="transmission"
+                required
+                className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+              >
+                <option value="manual">Manual</option>
+                <option value="automatica">Automática</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-status">Status</Label>
+              <select
+                id="av-status"
+                name="status"
+                required
+                className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+              >
+                <option value="disponible">Disponible</option>
+                <option value="reservado">Reservado</option>
+                <option value="vendido">Vendido</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-location">Location</Label>
+              <Input id="av-location" name="location" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="av-description">Description</Label>
+            <Textarea id="av-description" name="description" rows={3} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>Features</Label>
+            <div className="grid grid-cols-2 gap-2">
+              {VEHICLE_FEATURES.map((feature) => (
+                <label key={feature} className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" name="features" value={feature} />
+                  {feature}
+                </label>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="av-photos">Photos (up to 8)</Label>
@@ -97,6 +161,10 @@ export function AddVehicleModal() {
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" name="featured" />
             Featured
+          </label>
+          <label className="flex items-center gap-2 text-sm">
+            <input type="checkbox" name="financingAvailable" />
+            Financing available
           </label>
           {error && <p className="text-sm text-red-600">{error}</p>}
           <Button type="submit" disabled={pending}>

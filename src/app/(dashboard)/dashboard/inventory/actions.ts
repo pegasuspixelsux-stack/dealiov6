@@ -39,6 +39,14 @@ export async function createVehicleAction(
       mileage: Number(formData.get("mileage")),
       category: formData.get("category"),
       featured: formData.get("featured") === "on",
+      version: formData.get("version") ?? "",
+      fuel: formData.get("fuel"),
+      transmission: formData.get("transmission"),
+      location: formData.get("location") ?? "",
+      financingAvailable: formData.get("financingAvailable") === "on",
+      status: formData.get("status"),
+      description: formData.get("description") ?? "",
+      features: formData.getAll("features"),
     });
 
   if (!fieldsParsed.success) {
@@ -53,5 +61,6 @@ export async function createVehicleAction(
   });
 
   revalidatePath("/dashboard/inventory");
+  revalidatePath("/inventory");
   return { success: true };
 }

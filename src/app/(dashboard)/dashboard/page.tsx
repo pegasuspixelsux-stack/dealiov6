@@ -1,16 +1,19 @@
 import { verifySession } from "@/lib/auth/dal";
 import { getVehicles } from "@/lib/vehicles/vehicles";
 import { getLeads } from "@/lib/leads/leads";
+import { getInventorySettings } from "@/lib/vehicles/inventory-config";
 import { computeDashboardStats } from "@/lib/dashboard/stats";
 import { KpiCard } from "@/components/dashboard/kpi-card";
+import { VehiclesAttentionTable } from "@/components/dashboard/vehicles-attention-table";
 
 export default async function DashboardHomePage() {
   const session = await verifySession();
   if (!session) return null;
 
-  const [vehicles, leads] = await Promise.all([
+  const [vehicles, leads, inventorySettings] = await Promise.all([
     getVehicles(session.dealershipId),
     getLeads(session.dealershipId),
+    getInventorySettings(session.dealershipId),
   ]);
   const stats = computeDashboardStats(vehicles, leads);
 
@@ -51,6 +54,14 @@ export default async function DashboardHomePage() {
           suffix={`(${stats.leadsConverted.conversionPercent}%)`}
         />
       </div>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-medium">Vehículos Publicados Hace Más Tiempo</h2>
+        <VehiclesAttentionTable
+          vehicles={vehicles}
+          staleListingDays={inventorySettings.staleListingDays}
+        />
+      </section>
     </div>
   );
 }

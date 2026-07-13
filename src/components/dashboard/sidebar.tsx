@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   Kanban,
+  Eye,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,6 +99,15 @@ function NavList({ role, onNavigate }: { role: Role; onNavigate?: () => void }) 
         ))}
       </div>
       <div className="mt-auto flex flex-col gap-1 border-t pt-4">
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent"
+        >
+          <Eye className="size-4 shrink-0" />
+          Preview
+        </a>
         {SETTINGS_ITEM.visible(role) && (
           <NavLink
             item={SETTINGS_ITEM}

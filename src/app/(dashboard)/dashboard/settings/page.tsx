@@ -4,8 +4,10 @@ import { can } from "@/lib/auth/permissions";
 import { Forbidden } from "@/components/dashboard/coming-soon";
 import { getLeadStageThresholds } from "@/lib/leads/lead-config";
 import { getBrands } from "@/lib/brands/brands";
+import { getInventorySettings } from "@/lib/vehicles/inventory-config";
 import { LeadThresholdsForm } from "./lead-thresholds-form";
 import { AddBrandForm } from "./add-brand-form";
+import { InventorySettingsForm } from "./inventory-settings-form";
 
 export default async function SettingsPage() {
   const session = await verifySession();
@@ -13,9 +15,10 @@ export default async function SettingsPage() {
     return <Forbidden />;
   }
 
-  const [thresholds, brands] = await Promise.all([
+  const [thresholds, brands, inventorySettings] = await Promise.all([
     getLeadStageThresholds(session.dealershipId),
     getBrands(session.dealershipId),
+    getInventorySettings(session.dealershipId),
   ]);
 
   return (
@@ -24,6 +27,10 @@ export default async function SettingsPage() {
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-medium">Leads</h2>
         <LeadThresholdsForm initial={thresholds} />
+      </section>
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-medium">Inventario</h2>
+        <InventorySettingsForm initial={inventorySettings} />
       </section>
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-medium">Marcas</h2>

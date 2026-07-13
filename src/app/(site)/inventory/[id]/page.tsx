@@ -43,6 +43,39 @@ export default async function VehicleDetailPage(
     <Section tone="light">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[65fr_35fr]">
         <div className="flex flex-col gap-10">
+          <PhotoGallery
+            images={vehicle.imageUrls}
+            alt={`${vehicle.make} ${vehicle.model}`}
+          />
+
+          {vehicle.description && (
+            <div className="flex flex-col gap-3">
+              <h2 className="font-heading text-xl tracking-tight">
+                Descripción
+              </h2>
+              <p className="text-sm leading-relaxed text-[#0d0d0d]/80">
+                {vehicle.description}
+              </p>
+            </div>
+          )}
+
+          {vehicle.features.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <h2 className="font-heading text-xl tracking-tight">
+                Equipamiento
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {vehicle.features.map((feature) => (
+                  <Badge key={feature} variant="outline">
+                    {feature}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <h1 className="font-heading text-3xl tracking-tight">
               {vehicle.year} {vehicle.make} {vehicle.model} {vehicle.version}
@@ -80,39 +113,6 @@ export default async function VehicleDetailPage(
             </div>
           </div>
 
-          <PhotoGallery
-            images={vehicle.imageUrls}
-            alt={`${vehicle.make} ${vehicle.model}`}
-          />
-
-          {vehicle.description && (
-            <div className="flex flex-col gap-3">
-              <h2 className="font-heading text-xl tracking-tight">
-                Descripción
-              </h2>
-              <p className="text-sm leading-relaxed text-[#0d0d0d]/80">
-                {vehicle.description}
-              </p>
-            </div>
-          )}
-
-          {vehicle.features.length > 0 && (
-            <div className="flex flex-col gap-3">
-              <h2 className="font-heading text-xl tracking-tight">
-                Equipamiento
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {vehicle.features.map((feature) => (
-                  <Badge key={feature} variant="outline">
-                    {feature}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-6">
           <VehicleInquiryButton vehicle={vehicle} dealership={dealership} dark />
           <VehicleContactForm vehicle={vehicle} dealership={dealership} />
         </div>

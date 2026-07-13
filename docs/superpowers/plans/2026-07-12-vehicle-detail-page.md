@@ -17,7 +17,7 @@
 - **Lead fields added this phase**: `email?: string`, `preferredContact?: "whatsapp"|"email"|"phone"` — both optional, no schema-breaking changes to existing lead docs.
 - **No vehicle edit/delete** — this phase is still add-only, matching the existing Inventory feature's scope.
 - **Explicitly out of scope this phase** (deferred to Phase 2/3, do not build): finance calculator card on the detail page, trust elements section (dealer hours/address/financing partner/reviews), similar vehicles, sticky contact bar, SEO meta tags / structured data, multi-currency.
-- **`VehicleCard` becomes a link** to `/inventory/{vehicle.id}` everywhere it's rendered (homepage AND the new inventory listing page). Its embedded WhatsApp "Consultar" button must **not** trigger navigation when clicked — wrap it in a plain `<div onClick={(e) => e.stopPropagation()}>`, not by modifying `VehicleInquiryButton` itself.
+- **`VehicleCard` becomes a link** to `/inventory/{vehicle.id}` everywhere it's rendered (homepage AND the new inventory listing page). Its embedded WhatsApp "Consultar" button must **not** trigger navigation when clicked — use the "stretched link" pattern (an absolutely-positioned `<Link>` as a *sibling* with a lower `z-index` than the button's wrapper), not a wrapping `<Link>` with `stopPropagation` (that doesn't work — see Task 3's correction note) and not by modifying `VehicleInquiryButton` itself.
 - **No automated test runner exists in this repo.** Verification is `npx tsc --noEmit` (after `npx next typegen` where noted) plus real Firestore round-trips via throwaway `scripts/manual-verify-*.ts` files (always deleted before commit) plus a final manual browser walkthrough.
 - Every client component that calls a Server Action wraps the call in try/catch/finally, clearing pending state in `finally` — mandatory codebase-wide pattern.
 
@@ -556,7 +556,9 @@ Note: `createVehicleAction` requires a real signed-in session (cookies), so it c
 - Consumes: `formatPrice` from `@/lib/format-price` (Task 1).
 - Produces: `VehicleCard` now links to `/inventory/{vehicle.id}` — this route doesn't exist until Task 5, which is a safe forward-reference (no `typedRoutes` in `next.config.ts`, confirmed — plain string `href`s aren't route-checked).
 
-- [ ] **Step 1: Wrap VehicleCard in a Link, apply formatPrice, guard the WhatsApp button from navigating**
+- [ ] **Step 1: Wrap VehicleCard in a stretched Link (as a sibling, not a wrapper), apply formatPrice**
+
+**Correction (found during Task 3's review, applied before this task's code was written):** an earlier draft of this step wrapped the whole card in `<Link>` and guarded the WhatsApp button with `onClick={(e) => e.stopPropagation()}`. That does NOT work — React's synthetic `stopPropagation()` only stops React's own synthetic bubbling, so it prevents `next/link`'s click-interception handler (the thing that would call `preventDefault()` to stop a native navigation) from ever running, but does nothing to the native DOM click event itself. The net effect is a hard, full-page navigation to `/inventory/{id}` when the WhatsApp button is clicked — the opposite of the intent — plus it nests a `<button>` inside an `<a>`, which is invalid HTML. The fix below uses the "stretched link" pattern instead: the `<Link>` is a `position: absolute; inset: 0` sibling (not a parent) with a lower `z-index` than the button's wrapper, so the button naturally receives its own clicks via normal stacking/hit-testing — no `stopPropagation`/`preventDefault` needed at all, and no invalid nesting.
 
 Replace the full contents of `src/components/site/homepage/vehicle-card.tsx`:
 ```tsx
@@ -580,13 +582,17 @@ export function VehicleCard({
   overlay?: boolean;
 }) {
   return (
-    <Link
-      href={`/inventory/${vehicle.id}`}
+    <div
       className={cn(
-        "group relative block aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
+        "group relative aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
         className
       )}
     >
+      <Link
+        href={`/inventory/${vehicle.id}`}
+        aria-label={`Ver detalle de ${vehicle.make} ${vehicle.model} ${vehicle.year}`}
+        className="absolute inset-0 z-10"
+      />
       {vehicle.imageUrls.length > 0 ? (
         <Image
           src={vehicle.imageUrls[0]}
@@ -633,22 +639,25 @@ export function VehicleCard({
           {vehicle.mileage.toLocaleString()} km ·{" "}
           {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
-        <div className={cn("mt-3 flex items-center gap-3", overlay ? "justify-between" : "justify-end")}>
+        <div
+          className={cn(
+            "relative z-20 mt-3 flex items-center gap-3",
+            overlay ? "justify-between" : "justify-end"
+          )}
+        >
           {overlay && (
             <p className="text-xl font-semibold text-white">
               {formatPrice(vehicle.price)}
             </p>
           )}
-          <div onClick={(event) => event.stopPropagation()}>
-            <VehicleInquiryButton
-              vehicle={vehicle}
-              dealership={dealership}
-              dark={!overlay}
-            />
-          </div>
+          <VehicleInquiryButton
+            vehicle={vehicle}
+            dealership={dealership}
+            dark={!overlay}
+          />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 ```

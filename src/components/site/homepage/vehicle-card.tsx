@@ -18,13 +18,17 @@ export function VehicleCard({
   overlay?: boolean;
 }) {
   return (
-    <Link
-      href={`/inventory/${vehicle.id}`}
+    <div
       className={cn(
-        "group relative block aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
+        "group relative aspect-square w-full overflow-hidden transition-transform hover:-translate-y-1",
         className
       )}
     >
+      <Link
+        href={`/inventory/${vehicle.id}`}
+        aria-label={`Ver detalle de ${vehicle.make} ${vehicle.model} ${vehicle.year}`}
+        className="absolute inset-0 z-10"
+      />
       {vehicle.imageUrls.length > 0 ? (
         <Image
           src={vehicle.imageUrls[0]}
@@ -71,21 +75,24 @@ export function VehicleCard({
           {vehicle.mileage.toLocaleString()} km ·{" "}
           {vehicle.category === "new" ? "Nuevo" : "Usado"}
         </p>
-        <div className={cn("mt-3 flex items-center gap-3", overlay ? "justify-between" : "justify-end")}>
+        <div
+          className={cn(
+            "relative z-20 mt-3 flex items-center gap-3",
+            overlay ? "justify-between" : "justify-end"
+          )}
+        >
           {overlay && (
             <p className="text-xl font-semibold text-white">
               {formatPrice(vehicle.price)}
             </p>
           )}
-          <div onClick={(event) => event.stopPropagation()}>
-            <VehicleInquiryButton
-              vehicle={vehicle}
-              dealership={dealership}
-              dark={!overlay}
-            />
-          </div>
+          <VehicleInquiryButton
+            vehicle={vehicle}
+            dealership={dealership}
+            dark={!overlay}
+          />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

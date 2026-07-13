@@ -10,6 +10,8 @@ export type LeadStage =
   | "ganado"
   | "perdido";
 
+export type PreferredContact = "whatsapp" | "email" | "phone";
+
 export const LEAD_STAGES: LeadStage[] = [
   "recibido",
   "contactado",
@@ -44,6 +46,8 @@ export interface Lead {
   name: string;
   contact: string;
   message: string;
+  email?: string;
+  preferredContact?: PreferredContact;
   stage: LeadStage;
   createdAt: string;
   updatedAt: string;
@@ -54,4 +58,6 @@ export const leadSchema = z.object({
   name: z.string().min(1),
   contact: z.string().min(1),
   message: z.string().min(1),
+  email: z.string().email().optional(),
+  preferredContact: z.enum(["whatsapp", "email", "phone"]).optional(),
 });

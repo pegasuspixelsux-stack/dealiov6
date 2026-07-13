@@ -1,6 +1,9 @@
 import { z } from "zod";
 
 export type VehicleCategory = "new" | "used";
+export type Fuel = "nafta" | "diesel" | "hibrido" | "electrico";
+export type Transmission = "manual" | "automatica";
+export type VehicleStatus = "disponible" | "reservado" | "vendido";
 
 export interface Vehicle {
   id: string;
@@ -13,6 +16,14 @@ export interface Vehicle {
   imageUrls: string[];
   category: VehicleCategory;
   featured: boolean;
+  version: string;
+  fuel: Fuel;
+  transmission: Transmission;
+  location: string;
+  financingAvailable: boolean;
+  status: VehicleStatus;
+  description: string;
+  features: string[];
 }
 
 export const vehicleSchema = z.object({
@@ -24,4 +35,46 @@ export const vehicleSchema = z.object({
   imageUrls: z.array(z.string().url()).min(1).max(8),
   category: z.enum(["new", "used"]),
   featured: z.boolean(),
+  version: z.string().default(""),
+  fuel: z.enum(["nafta", "diesel", "hibrido", "electrico"]).default("nafta"),
+  transmission: z.enum(["manual", "automatica"]).default("manual"),
+  location: z.string().default(""),
+  financingAvailable: z.boolean().default(false),
+  status: z.enum(["disponible", "reservado", "vendido"]).default("disponible"),
+  description: z.string().default(""),
+  features: z.array(z.string()).default([]),
 });
+
+export const FUEL_LABELS: Record<Fuel, string> = {
+  nafta: "Nafta",
+  diesel: "Diesel",
+  hibrido: "Híbrido",
+  electrico: "Eléctrico",
+};
+
+export const TRANSMISSION_LABELS: Record<Transmission, string> = {
+  manual: "Manual",
+  automatica: "Automática",
+};
+
+export const VEHICLE_STATUS_LABELS: Record<VehicleStatus, string> = {
+  disponible: "Disponible",
+  reservado: "Reservado",
+  vendido: "Vendido",
+};
+
+export const VEHICLE_FEATURES = [
+  "Airbags",
+  "ABS",
+  "Control de estabilidad",
+  "Cámara de retroceso",
+  "Sensores de estacionamiento",
+  "Aire acondicionado",
+  "Pantalla multimedia",
+  "Bluetooth",
+  "Asientos eléctricos",
+  "Apple CarPlay",
+  "Android Auto",
+  "Keyless entry",
+  "Puerto USB de carga",
+] as const;

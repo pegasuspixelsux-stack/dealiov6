@@ -30,6 +30,7 @@ if (serviceAccount) {
       });
   adminAuth = getAuth(adminApp);
   adminFirestore = getFirestore(adminApp);
+  adminFirestore.settings({ ignoreUndefinedProperties: true });
   adminStorage = getStorage(adminApp);
 } else if (process.env.NODE_ENV !== "production") {
   console.warn(

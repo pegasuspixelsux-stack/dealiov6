@@ -70,6 +70,7 @@ export async function createVehicleAction(
   });
 
   revalidatePath("/dashboard/inventory");
+  revalidatePath("/dashboard");
   revalidatePath("/inventory");
   return { success: true };
 }
@@ -149,6 +150,7 @@ export async function updateVehicleAction(
   });
 
   revalidatePath("/dashboard/inventory");
+  revalidatePath("/dashboard");
   revalidatePath("/inventory");
   revalidatePath(`/inventory/${vehicleId}`);
   return { success: true };

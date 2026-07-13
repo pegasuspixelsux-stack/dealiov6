@@ -70,7 +70,9 @@ export function LeadsAttentionTable({
           {waiting.map(({ lead, staleness }) => (
             <tr key={lead.id} className="border-b">
               <td className="py-2 pr-4">{lead.name}</td>
-              <td className="line-clamp-1 max-w-48 py-2 pr-4">{lead.message}</td>
+              <td className="max-w-48 py-2 pr-4">
+                <div className="line-clamp-1">{lead.message}</div>
+              </td>
               <td className="py-2 pr-4">{SOURCE_LABELS[lead.source]}</td>
               <td className="py-2 pr-4">{new Date(lead.createdAt).toLocaleDateString()}</td>
               <td className="py-2 pr-4">{daysWaiting(lead.updatedAt)}</td>

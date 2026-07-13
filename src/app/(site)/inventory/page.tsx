@@ -45,6 +45,7 @@ export default async function InventoryPage(props: PageProps<"/inventory">) {
         Inventario
       </h1>
       <InventorySearchForm
+        key={`${yearMin}|${yearMax}|${make}|${model}|${color}|${bodyType}|${priceMin}|${priceMax}`}
         vehicles={vehicles}
         initialFilters={{
           yearMin,

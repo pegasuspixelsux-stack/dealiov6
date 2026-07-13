@@ -469,6 +469,8 @@ Note: the Modelo `<select>` uses `key={make}` so React remounts it (resetting to
 
 - [ ] **Step 2: Wire the search form into the inventory page and apply all filters**
 
+**Correction (found during Task 3's review, applied after this task's code was written):** the original version of this step gave `<InventorySearchForm>` no `key` prop. Because `router.push` to a new query string (e.g. clicking "Limpiar filtros", or a `?make=X` link while already on `/inventory`) is a same-route client-side navigation, React reconciles the existing component instance in place rather than remounting it — so `initialFilters`'s `useState` initializer and every field's `defaultValue` never re-apply, and the form visually keeps showing the *previous* selections even though the grid below it correctly updates. Fixed by giving the form a `key` derived from the filter values themselves, forcing a full remount (and thus a fresh `useState`/`defaultValue` application) on every distinct filter combination. This is reflected in the code below.
+
 Replace the full contents of `src/app/(site)/inventory/page.tsx`:
 ```tsx
 import { headers } from "next/headers";
@@ -518,6 +520,7 @@ export default async function InventoryPage(props: PageProps<"/inventory">) {
         Inventario
       </h1>
       <InventorySearchForm
+        key={`${yearMin}|${yearMax}|${make}|${model}|${color}|${bodyType}|${priceMin}|${priceMax}`}
         vehicles={vehicles}
         initialFilters={{
           yearMin,

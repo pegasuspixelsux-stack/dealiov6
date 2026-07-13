@@ -2,18 +2,22 @@ import { verifySession } from "@/lib/auth/dal";
 import { getVehicles } from "@/lib/vehicles/vehicles";
 import { getLeads } from "@/lib/leads/leads";
 import { getInventorySettings } from "@/lib/vehicles/inventory-config";
+import { getLeadStageThresholds } from "@/lib/leads/lead-config";
 import { computeDashboardStats } from "@/lib/dashboard/stats";
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { VehiclesAttentionTable } from "@/components/dashboard/vehicles-attention-table";
+import { LeadsAttentionTable } from "@/components/dashboard/leads-attention-table";
+import { QuickActions } from "@/components/dashboard/quick-actions";
 
 export default async function DashboardHomePage() {
   const session = await verifySession();
   if (!session) return null;
 
-  const [vehicles, leads, inventorySettings] = await Promise.all([
+  const [vehicles, leads, inventorySettings, leadThresholds] = await Promise.all([
     getVehicles(session.dealershipId),
     getLeads(session.dealershipId),
     getInventorySettings(session.dealershipId),
+    getLeadStageThresholds(session.dealershipId),
   ]);
   const stats = computeDashboardStats(vehicles, leads);
 
@@ -55,12 +59,19 @@ export default async function DashboardHomePage() {
         />
       </div>
 
+      <QuickActions />
+
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-medium">Vehículos Publicados Hace Más Tiempo</h2>
         <VehiclesAttentionTable
           vehicles={vehicles}
           staleListingDays={inventorySettings.staleListingDays}
         />
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-medium">Leads Esperando Hace Más Tiempo</h2>
+        <LeadsAttentionTable leads={leads} thresholds={leadThresholds} />
       </section>
     </div>
   );

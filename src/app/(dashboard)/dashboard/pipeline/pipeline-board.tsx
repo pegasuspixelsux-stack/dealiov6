@@ -4,7 +4,7 @@ import { useState } from "react";
 import { LEAD_STAGES, LEAD_STAGE_LABELS } from "@/types";
 import type { Lead, LeadSource, LeadStageThresholds } from "@/types";
 import { getLeadStaleness, type Staleness } from "@/lib/leads/staleness";
-import { LeadDetailModal } from "./lead-detail-modal";
+import { LeadDetailModal } from "@/components/dashboard/lead-detail-modal";
 
 const STALENESS_COLORS: Record<Staleness, string> = {
   green: "bg-green-500",

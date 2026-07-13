@@ -4,6 +4,13 @@ export type VehicleCategory = "new" | "used";
 export type Fuel = "nafta" | "diesel" | "hibrido" | "electrico";
 export type Transmission = "manual" | "automatica";
 export type VehicleStatus = "disponible" | "reservado" | "vendido";
+export type BodyType =
+  | "sedan"
+  | "suv"
+  | "hatchback"
+  | "pickup"
+  | "coupe"
+  | "furgon";
 
 export interface Vehicle {
   id: string;
@@ -24,6 +31,8 @@ export interface Vehicle {
   status: VehicleStatus;
   description: string;
   features: string[];
+  color: string;
+  bodyType: BodyType;
 }
 
 export const vehicleSchema = z.object({
@@ -43,6 +52,10 @@ export const vehicleSchema = z.object({
   status: z.enum(["disponible", "reservado", "vendido"]).default("disponible"),
   description: z.string().default(""),
   features: z.array(z.string()).default([]),
+  color: z.string().default(""),
+  bodyType: z
+    .enum(["sedan", "suv", "hatchback", "pickup", "coupe", "furgon"])
+    .default("sedan"),
 });
 
 export const FUEL_LABELS: Record<Fuel, string> = {
@@ -61,6 +74,15 @@ export const VEHICLE_STATUS_LABELS: Record<VehicleStatus, string> = {
   disponible: "Disponible",
   reservado: "Reservado",
   vendido: "Vendido",
+};
+
+export const BODY_TYPE_LABELS: Record<BodyType, string> = {
+  sedan: "Sedán",
+  suv: "SUV",
+  hatchback: "Hatchback",
+  pickup: "Pickup",
+  coupe: "Coupé",
+  furgon: "Furgón",
 };
 
 export const VEHICLE_FEATURES = [

@@ -47,6 +47,8 @@ export async function createVehicleAction(
       status: formData.get("status"),
       description: formData.get("description") ?? "",
       features: formData.getAll("features"),
+      color: formData.get("color") ?? "",
+      bodyType: formData.get("bodyType"),
     });
 
   if (!fieldsParsed.success) {

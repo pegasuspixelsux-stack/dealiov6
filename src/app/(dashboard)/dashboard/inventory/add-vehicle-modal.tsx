@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { VEHICLE_FEATURES } from "@/types";
+import { VEHICLE_FEATURES, BODY_TYPE_LABELS } from "@/types";
 import { createVehicleAction } from "./actions";
 
 export function AddVehicleModal() {
@@ -130,6 +130,25 @@ export function AddVehicleModal() {
             <div className="flex flex-col gap-2">
               <Label htmlFor="av-location">Location</Label>
               <Input id="av-location" name="location" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-color">Color</Label>
+              <Input id="av-color" name="color" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="av-body-type">Body Type</Label>
+              <select
+                id="av-body-type"
+                name="bodyType"
+                required
+                className="border-input h-9 rounded-md border bg-transparent px-3 text-sm"
+              >
+                {Object.entries(BODY_TYPE_LABELS).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="flex flex-col gap-2">

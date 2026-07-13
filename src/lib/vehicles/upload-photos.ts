@@ -14,7 +14,7 @@ export async function uploadVehiclePhotos(
 
   return Promise.all(
     files.map(async (file, index) => {
-      const path = `dealerships/${dealershipId}/vehicles/${vehicleId}/${index}-${file.name}`;
+      const path = `dealerships/${dealershipId}/vehicles/${vehicleId}/${Date.now()}-${index}-${file.name}`;
       const buffer = Buffer.from(await file.arrayBuffer());
       const storageFile = bucket.file(path);
       await storageFile.save(buffer, { contentType: file.type });

@@ -56,3 +56,23 @@ export async function createVehicle(
       updatedAt: now,
     });
 }
+
+export async function updateVehicle(
+  dealershipId: string,
+  vehicleId: string,
+  input: z.infer<typeof vehicleSchema>
+): Promise<void> {
+  if (!adminFirestore) {
+    throw new Error("Firestore is not configured.");
+  }
+
+  await adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .collection("vehicles")
+    .doc(vehicleId)
+    .set(
+      { ...input, id: vehicleId, dealershipId, updatedAt: new Date() },
+      { merge: true }
+    );
+}

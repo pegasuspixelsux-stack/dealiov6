@@ -26,7 +26,7 @@ export function BrandScroller({ brands }: { brands: Brand[] }) {
     <Section tone="light">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-heading text-2xl tracking-tight">
-          Comprá por Marca
+          Descubrí nuestras marcas oficiales
         </h2>
         <div className="flex gap-2">
           <button

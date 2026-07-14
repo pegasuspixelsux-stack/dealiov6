@@ -15,10 +15,10 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="relative z-10 w-full bg-transparent p-4 md:px-[50px] md:py-5">
+    <div className="relative z-10 w-full bg-transparent">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex max-w-[1440px] items-center gap-3 rounded-full border border-[#0d0d0d]/50 bg-white/85 px-5 py-2 backdrop-blur-md md:px-6 md:py-3"
+        className="flex w-full items-center gap-3 rounded-full border border-[#0d0d0d]/50 bg-white/85 px-5 py-2 backdrop-blur-md md:px-6 md:py-3"
       >
         <Search className="size-5 shrink-0 text-[#0d0d0d]/50" />
         <input

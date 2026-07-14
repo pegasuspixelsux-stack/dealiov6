@@ -10,7 +10,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 p-4 md:grid-cols-3 md:gap-4 md:p-[50px]">
         {/* Column 1: nav + search + photo, stacked */}
         <div className="flex h-[85vh] min-h-[560px] flex-col gap-3 md:h-[80vh] md:gap-4">
-          <Header dealership={dealership} sticky={false} />
+          <Header dealership={dealership} />
           <HeroSearch />
 
           <div className="relative flex-1 overflow-hidden rounded-[12px] text-white">

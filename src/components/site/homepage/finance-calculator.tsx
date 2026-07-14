@@ -86,13 +86,13 @@ export function FinanceCalculator() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-2 rounded-[12px] border border-[#0d0d0d]/50 p-8 text-center">
-            <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
+          <div className="flex flex-col items-center justify-center gap-2 rounded-[12px] border border-[#0d0d0d]/50 bg-[#0d0d0d] p-8 text-center">
+            <p className="text-sm uppercase tracking-wide text-white/60">
               Cuota Mensual Estimada
             </p>
             <p
               data-testid="monthly-payment"
-              className="font-heading text-5xl text-[#0d0d0d]"
+              className="font-heading text-5xl text-white"
             >
               {formatPrice(Math.round(monthlyPayment))}
             </p>

@@ -6,9 +6,16 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
+  noMobilePadding?: boolean;
 }
 
-export function Section({ tone, children, className, id }: SectionProps) {
+export function Section({
+  tone,
+  children,
+  className,
+  id,
+  noMobilePadding = false,
+}: SectionProps) {
   return (
     <section
       id={id}
@@ -20,7 +27,12 @@ export function Section({ tone, children, className, id }: SectionProps) {
         className
       )}
     >
-      <div className="mx-auto max-w-[1440px] px-4 md:px-[50px]">
+      <div
+        className={cn(
+          "mx-auto max-w-[1440px] md:px-[50px]",
+          noMobilePadding ? "px-0" : "px-4"
+        )}
+      >
         {children}
       </div>
     </section>

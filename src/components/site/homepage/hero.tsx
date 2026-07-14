@@ -33,13 +33,13 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
       </div>
 
       <div className="mx-auto max-w-[1440px] p-4 pt-3 md:px-[50px] md:pt-4 md:pb-[50px]">
-        <div className="flex items-center justify-between gap-4 rounded-[12px] bg-[#0d0d0d] p-6 text-white md:p-8">
+        <div className="flex items-center justify-between gap-4 rounded-[12px] border border-[#0d0d0d]/50 bg-transparent p-6 text-[#0d0d0d] md:p-8">
           <p className="font-heading text-xl tracking-tight sm:text-2xl">
             ¿Buscás tu próximo auto?
           </p>
           <Link
             href="/inventory"
-            className="shrink-0 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#0d0d0d] transition-colors hover:bg-white/85 sm:px-6"
+            className="shrink-0 rounded-full bg-[#0d0d0d] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#161616] sm:px-6"
           >
             Ver Inventario
           </Link>

@@ -19,16 +19,16 @@ const NAV_LINKS = [
 
 export function Header({ dealership }: { dealership: DealershipConfig }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0d0d0d]/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-40 border-b border-[#0d0d0d]/10 bg-transparent backdrop-blur-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Logo dealership={dealership} className="text-white" />
+        <Logo dealership={dealership} className="text-[#0d0d0d]" />
 
         <nav className="hidden gap-6 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white"
+              className="text-sm font-medium text-[#0d0d0d]/70 hover:text-[#0d0d0d]"
             >
               {link.label}
             </Link>
@@ -36,7 +36,7 @@ export function Header({ dealership }: { dealership: DealershipConfig }) {
         </nav>
 
         <Button
-          className="hidden bg-white text-black hover:bg-white/80 md:inline-flex"
+          className="hidden bg-[#0d0d0d] text-white hover:bg-[#0d0d0d]/80 md:inline-flex"
           render={<Link href="/login">Iniciar sesión</Link>}
         />
 
@@ -46,7 +46,7 @@ export function Header({ dealership }: { dealership: DealershipConfig }) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/10 md:hidden"
+                className="text-[#0d0d0d] hover:bg-[#0d0d0d]/10 md:hidden"
               >
                 <Menu className="size-5" />
                 <span className="sr-only">Abrir menú</span>

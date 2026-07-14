@@ -30,7 +30,7 @@ export function Section({
       <div
         className={cn(
           "mx-auto max-w-[1440px] md:px-[50px]",
-          noMobilePadding ? "px-0" : "px-4"
+          noMobilePadding ? "px-0" : "px-[10px]"
         )}
       >
         {children}

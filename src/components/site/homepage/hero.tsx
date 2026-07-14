@@ -7,7 +7,7 @@ import type { DealershipConfig } from "@/types";
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
   return (
     <section className="w-full bg-transparent">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 p-4 md:grid-cols-3 md:gap-4 md:p-[50px]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 px-[10px] py-4 md:grid-cols-3 md:gap-4 md:p-[50px]">
         {/* Column 1: nav + search + photo, stacked */}
         <div className="flex h-[85vh] min-h-[560px] flex-col gap-3 md:h-[80vh] md:gap-4">
           <Header dealership={dealership} />

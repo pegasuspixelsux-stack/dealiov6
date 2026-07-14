@@ -20,6 +20,7 @@ export default async function InventoryPage(props: PageProps<"/inventory">) {
   const bodyType = paramString(searchParams.bodyType);
   const priceMin = paramString(searchParams.price_min);
   const priceMax = paramString(searchParams.price_max);
+  const q = paramString(searchParams.q).toLowerCase();
 
   const headerList = await headers();
   const dealership = getDealershipConfig(
@@ -36,6 +37,13 @@ export default async function InventoryPage(props: PageProps<"/inventory">) {
     if (yearMax && vehicle.year > Number(yearMax)) return false;
     if (priceMin && vehicle.price < Number(priceMin)) return false;
     if (priceMax && vehicle.price > Number(priceMax)) return false;
+    if (
+      q &&
+      !`${vehicle.make} ${vehicle.model} ${vehicle.year}`
+        .toLowerCase()
+        .includes(q)
+    )
+      return false;
     return true;
   });
 

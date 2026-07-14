@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const businessHoursSchema = z.object({
+export const businessHoursSchema = z.object({
   monday: z.string(),
   tuesday: z.string(),
   wednesday: z.string(),
@@ -38,6 +38,7 @@ export const dealershipConfigSchema = z.object({
   id: z.string(),
   name: z.string(),
   logoUrl: z.string().optional(),
+  logoText: z.string().optional(),
   primaryColor: z.string(),
   secondaryColor: z.string(),
   radius: z.string().default("0.625rem"),
@@ -55,3 +56,15 @@ export const dealershipConfigSchema = z.object({
 });
 
 export type DealershipConfig = z.infer<typeof dealershipConfigSchema>;
+
+export const dealershipProfileSchema = z.object({
+  name: z.string().min(1, "El nombre es requerido."),
+  logoText: z.string().optional(),
+  address: z.string().min(1, "La dirección es requerida."),
+  hours: businessHoursSchema,
+  whatsapp: z.string().min(1, "El WhatsApp es requerido."),
+  email: z.string().email("Correo electrónico inválido."),
+  phone: z.string().min(1, "El teléfono es requerido."),
+});
+
+export type DealershipProfile = z.infer<typeof dealershipProfileSchema>;

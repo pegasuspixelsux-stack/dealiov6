@@ -29,7 +29,7 @@ export default async function VehicleDetailPage(
 ) {
   const { id } = await props.params;
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
   const vehicles = await getVehicles(dealership.id);

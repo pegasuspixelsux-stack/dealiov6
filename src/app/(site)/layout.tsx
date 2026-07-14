@@ -9,7 +9,7 @@ export default async function SiteLayout({
   children: React.ReactNode;
 }) {
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
 

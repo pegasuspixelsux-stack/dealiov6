@@ -5,9 +5,11 @@ import { Forbidden } from "@/components/dashboard/coming-soon";
 import { getLeadStageThresholds } from "@/lib/leads/lead-config";
 import { getBrands } from "@/lib/brands/brands";
 import { getInventorySettings } from "@/lib/vehicles/inventory-config";
+import { getDealershipConfig } from "@/lib/dealership/config";
 import { LeadThresholdsForm } from "./lead-thresholds-form";
 import { AddBrandForm } from "./add-brand-form";
 import { InventorySettingsForm } from "./inventory-settings-form";
+import { DealershipProfileForm } from "./dealership-profile-form";
 
 export default async function SettingsPage() {
   const session = await verifySession();
@@ -15,15 +17,20 @@ export default async function SettingsPage() {
     return <Forbidden />;
   }
 
-  const [thresholds, brands, inventorySettings] = await Promise.all([
+  const [thresholds, brands, inventorySettings, dealership] = await Promise.all([
     getLeadStageThresholds(session.dealershipId),
     getBrands(session.dealershipId),
     getInventorySettings(session.dealershipId),
+    getDealershipConfig(session.dealershipId),
   ]);
 
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-xl font-semibold">Settings</h1>
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-medium">Configuración</h2>
+        <DealershipProfileForm initial={dealership} />
+      </section>
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-medium">Leads</h2>
         <LeadThresholdsForm initial={thresholds} />

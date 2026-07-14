@@ -31,7 +31,7 @@ export function Logo({
           {dealership.name.charAt(0)}
         </span>
       )}
-      <span>{dealership.name}</span>
+      <span>{dealership.logoText || dealership.name}</span>
     </Link>
   );
 }

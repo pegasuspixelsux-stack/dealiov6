@@ -23,7 +23,7 @@ export default async function InventoryPage(props: PageProps<"/inventory">) {
   const q = paramString(searchParams.q).toLowerCase();
 
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
   const vehicles = await getVehicles(dealership.id);

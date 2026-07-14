@@ -1,4 +1,10 @@
-import { dealershipConfigSchema, type DealershipConfig } from "@/types";
+import "server-only";
+import { adminFirestore } from "@/lib/firebase/admin";
+import {
+  dealershipConfigSchema,
+  type DealershipConfig,
+  type DealershipProfile,
+} from "@/types";
 import { ULTIMA_DEALERSHIP_CONFIG } from "./mock-data";
 
 export const DEFAULT_DEALERSHIP_ID =
@@ -16,13 +22,47 @@ export function resolveDealershipId(host: string | null): string {
 }
 
 /**
- * Returns the resolved dealership's config. Backed by a hardcoded fixture
- * today; a real implementation fetches `dealerships/{dealershipId}` from
- * Firestore and parses it through the same schema.
+ * Returns the resolved dealership's config, reading `dealerships/{dealershipId}`
+ * from Firestore and merging it over the static fixture so tenants that
+ * haven't customized every field still get sensible defaults.
  */
-export function getDealershipConfig(
+export async function getDealershipConfig(
   dealershipId: string = DEFAULT_DEALERSHIP_ID
-): DealershipConfig {
-  void dealershipId;
-  return dealershipConfigSchema.parse(ULTIMA_DEALERSHIP_CONFIG);
+): Promise<DealershipConfig> {
+  if (!adminFirestore) {
+    return dealershipConfigSchema.parse(ULTIMA_DEALERSHIP_CONFIG);
+  }
+
+  const doc = await adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .get();
+
+  const merged = {
+    ...ULTIMA_DEALERSHIP_CONFIG,
+    ...doc.data(),
+    id: dealershipId,
+  };
+  const parsed = dealershipConfigSchema.safeParse(merged);
+  return parsed.success
+    ? parsed.data
+    : dealershipConfigSchema.parse(ULTIMA_DEALERSHIP_CONFIG);
+}
+
+/**
+ * Updates the editable profile fields (name, logo, contact info, hours) on
+ * a dealership's Firestore doc, leaving every other config field untouched.
+ */
+export async function updateDealershipProfile(
+  dealershipId: string,
+  profile: DealershipProfile & { logoUrl?: string }
+): Promise<void> {
+  if (!adminFirestore) {
+    throw new Error("Firestore is not configured.");
+  }
+
+  await adminFirestore
+    .collection("dealerships")
+    .doc(dealershipId)
+    .set(profile, { merge: true });
 }

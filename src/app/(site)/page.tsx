@@ -14,7 +14,7 @@ import { WhatsAppFab } from "@/components/site/homepage/whatsapp-fab";
 
 export default async function HomePage() {
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
   const [vehicles, brands] = await Promise.all([

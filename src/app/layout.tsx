@@ -23,7 +23,7 @@ const archivoBlack = Archivo_Black({
 
 export async function generateMetadata(): Promise<Metadata> {
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
 
@@ -39,7 +39,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const headerList = await headers();
-  const dealership = getDealershipConfig(
+  const dealership = await getDealershipConfig(
     resolveDealershipId(headerList.get("host"))
   );
 

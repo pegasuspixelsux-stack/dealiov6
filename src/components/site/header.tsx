@@ -34,7 +34,7 @@ export function Header({
           : "relative z-10"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-4">
         <Logo dealership={dealership} className="text-[#0d0d0d]" />
 
         <nav className="hidden gap-6 md:flex">

@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
+import { cn } from "@/lib/utils";
 import type { DealershipConfig } from "@/types";
 
 const NAV_LINKS = [
@@ -17,9 +18,22 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contacto" },
 ];
 
-export function Header({ dealership }: { dealership: DealershipConfig }) {
+export function Header({
+  dealership,
+  sticky = true,
+}: {
+  dealership: DealershipConfig;
+  sticky?: boolean;
+}) {
   return (
-    <header className="sticky top-0 z-40 border-b border-[#0d0d0d]/10 bg-transparent backdrop-blur-lg">
+    <header
+      className={cn(
+        "bg-transparent",
+        sticky
+          ? "sticky top-0 z-40 border-b border-[#0d0d0d]/10 backdrop-blur-lg"
+          : "relative z-10"
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Logo dealership={dealership} className="text-[#0d0d0d]" />
 

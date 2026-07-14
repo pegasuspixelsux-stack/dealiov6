@@ -3,7 +3,6 @@ import { getDealershipConfig, resolveDealershipId } from "@/lib/dealership/confi
 import { getVehicles } from "@/lib/vehicles/vehicles";
 import { getBrands } from "@/lib/brands/brands";
 import { Hero } from "@/components/site/homepage/hero";
-import { HeroSearch } from "@/components/site/homepage/hero-search";
 import { BrandScroller } from "@/components/site/homepage/brand-scroller";
 import { TrendVehicles } from "@/components/site/homepage/trend-vehicles";
 import { About } from "@/components/site/homepage/about";
@@ -25,7 +24,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSearch />
       <Hero dealership={dealership} />
       <BrandScroller brands={brands} />
       <TrendVehicles dealership={dealership} vehicles={vehicles} />

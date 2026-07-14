@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { Header } from "@/components/site/header";
+import { SiteHeaderGate } from "@/components/site/site-header-gate";
 import { Footer } from "@/components/site/footer";
 import { getDealershipConfig, resolveDealershipId } from "@/lib/dealership/config";
 
@@ -15,7 +15,7 @@ export default async function SiteLayout({
 
   return (
     <div className="flex min-h-svh flex-col">
-      <Header dealership={dealership} />
+      <SiteHeaderGate dealership={dealership} />
       <main className="flex-1">{children}</main>
       <Footer dealership={dealership} />
     </div>

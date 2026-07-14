@@ -5,7 +5,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
   return (
     <section className="w-full bg-[#eff1f3]">
       <div className="mx-auto h-[90vh] min-h-[600px] max-w-[1440px] p-4 md:p-[50px]">
-        <div className="relative flex h-full w-full flex-col justify-end overflow-hidden rounded-3xl p-6 text-white md:p-10">
+        <div className="relative flex h-full w-full flex-col justify-end overflow-hidden rounded-[12px] p-6 text-white md:p-10">
           <Image
             src="/images/Coastal%20Highway_1.png"
             alt=""

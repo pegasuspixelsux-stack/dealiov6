@@ -10,7 +10,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
       <Header dealership={dealership} sticky={false} />
       <HeroSearch />
 
-      <div className="relative h-[75vh] min-h-[480px] w-full overflow-hidden rounded-[12px] text-white">
+      <div className="relative mx-auto h-[75vh] min-h-[480px] w-full max-w-[1440px] overflow-hidden rounded-[12px] text-white">
         <Image
           src="/images/Coastal%20Highway_1.png"
           alt=""

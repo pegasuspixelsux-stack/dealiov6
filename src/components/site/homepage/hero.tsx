@@ -1,34 +1,64 @@
-import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, MapPin, MessageCircle } from "lucide-react";
 import type { DealershipConfig } from "@/types";
 
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
+  const whatsappHref = `https://wa.me/${dealership.whatsapp.replace(/[^\d]/g, "")}`;
+
   return (
-    <section className="relative h-[700px] w-full overflow-hidden text-left text-white">
-      <Image
-        src="/images/Coastal%20Highway_1.png"
-        alt=""
-        fill
-        priority
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-      <div className="relative mx-auto flex h-full w-full max-w-[1440px] items-end justify-start p-6 pb-20 md:p-[50px] md:pb-32">
-        <div className="flex max-w-2xl flex-col items-start gap-2">
-          <p className="text-sm font-medium tracking-widest text-white/70 uppercase">
+    <section className="w-full bg-[#eff1f3]">
+      <div className="mx-auto grid h-[90vh] min-h-[600px] max-w-[1440px] grid-cols-1 grid-rows-4 gap-3 p-4 md:grid-cols-12 md:grid-rows-6 md:gap-4 md:p-[50px]">
+        {/* Thesis tile */}
+        <div className="relative row-start-1 row-end-2 flex flex-col justify-end overflow-hidden bg-[#0d0d0d] p-6 text-white md:col-start-1 md:col-end-8 md:row-start-1 md:row-end-5 md:p-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(255,255,255,0.08),transparent_55%)]" />
+          <p className="relative text-sm font-medium tracking-widest text-white/60 uppercase">
             {dealership.name}
           </p>
-          <h1 className="font-heading text-3xl tracking-tight sm:text-6xl">
+          <h1 className="font-heading relative mt-2 text-4xl tracking-tight sm:text-6xl">
             Tu Próximo Auto Empieza Aquí
           </h1>
-          <p className="max-w-md text-lg text-white/70">
+          <p className="relative mt-3 max-w-md text-lg text-white/70">
             Encontrá el auto que acompaña tu estilo de vida
           </p>
         </div>
-      </div>
-      <div className="absolute inset-x-0 bottom-4 flex flex-col items-center gap-1 text-white/40">
-        <span className="text-xs tracking-widest uppercase">Explorar</span>
-        <ChevronDown className="size-4 animate-pulse" />
+
+        {/* Explore inventory CTA tile */}
+        <Link
+          href="/inventory"
+          className="group row-start-2 row-end-3 flex flex-col justify-between bg-[#f9f9f9] p-6 text-[#0d0d0d] transition-colors hover:bg-white md:col-start-8 md:col-end-13 md:row-start-1 md:row-end-4 md:p-8"
+        >
+          <ArrowUpRight className="size-8 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <div>
+            <p className="font-heading text-xl tracking-tight">Ver Inventario</p>
+            <p className="mt-1 text-sm text-[#0d0d0d]/60">
+              Explorá todos los modelos disponibles
+            </p>
+          </div>
+        </Link>
+
+        {/* Address / info tile */}
+        <div className="row-start-3 row-end-4 flex flex-col justify-center gap-2 bg-[#f9f9f9] p-6 text-[#0d0d0d] md:col-start-1 md:col-end-8 md:row-start-5 md:row-end-7 md:p-8">
+          <div className="flex items-center gap-2 text-sm text-[#0d0d0d]/70">
+            <MapPin className="size-4 shrink-0" />
+            {dealership.address}
+          </div>
+          <div className="flex items-center gap-2 text-sm text-[#0d0d0d]/70">
+            <MessageCircle className="size-4 shrink-0" />
+            {dealership.phone}
+          </div>
+        </div>
+
+        {/* WhatsApp CTA tile */}
+        <Link
+          href={whatsappHref}
+          className="group row-start-4 row-end-5 flex flex-col justify-between bg-[#0d0d0d] p-6 text-white transition-colors hover:bg-[#161616] md:col-start-8 md:col-end-13 md:row-start-4 md:row-end-7 md:p-8"
+        >
+          <MessageCircle className="size-8 text-[#25D366] transition-transform group-hover:scale-110" />
+          <div>
+            <p className="font-heading text-xl tracking-tight">Hablemos</p>
+            <p className="mt-1 text-sm text-white/60">Consultá por WhatsApp</p>
+          </div>
+        </Link>
       </div>
     </section>
   );

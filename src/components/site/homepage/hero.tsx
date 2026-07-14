@@ -6,7 +6,7 @@ import type { DealershipConfig } from "@/types";
 
 export function Hero({ dealership }: { dealership: DealershipConfig }) {
   return (
-    <section className="w-full bg-[#eff1f3]">
+    <section className="w-full bg-transparent">
       <Header dealership={dealership} sticky={false} />
       <HeroSearch />
 
@@ -32,7 +32,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1440px] pt-3 pb-4 md:pt-4 md:pb-[50px]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 pt-3 pb-4 sm:grid-cols-2 md:gap-4 md:pt-4 md:pb-[50px]">
         <div className="flex items-center justify-between gap-4 rounded-[12px] border border-[#0d0d0d]/50 bg-transparent p-6 text-[#0d0d0d] md:p-8">
           <p className="font-heading text-xl tracking-tight sm:text-2xl">
             ¿Buscás tu próximo auto?
@@ -42,6 +42,18 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
             className="shrink-0 rounded-full bg-[#0d0d0d] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#161616] sm:px-6"
           >
             Ver Inventario
+          </Link>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 rounded-[12px] border border-[#0d0d0d]/50 bg-transparent p-6 text-[#0d0d0d] md:p-8">
+          <p className="font-heading text-xl tracking-tight sm:text-2xl">
+            Canjeá tu Auto
+          </p>
+          <Link
+            href="/#trade-in"
+            className="shrink-0 rounded-full bg-[#0d0d0d] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#161616] sm:px-6"
+          >
+            Cotizar
           </Link>
         </div>
       </div>

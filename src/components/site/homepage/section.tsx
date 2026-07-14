@@ -5,11 +5,13 @@ interface SectionProps {
   tone: "dark" | "light";
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
-export function Section({ tone, children, className }: SectionProps) {
+export function Section({ tone, children, className, id }: SectionProps) {
   return (
     <section
+      id={id}
       className={cn(
         "py-12 md:py-20",
         tone === "dark"

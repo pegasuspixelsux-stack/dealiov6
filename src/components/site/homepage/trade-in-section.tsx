@@ -3,7 +3,7 @@ import { TradeIn } from "./trade-in";
 
 export function TradeInSection({ dealershipId }: { dealershipId: string }) {
   return (
-    <Section tone="light">
+    <Section tone="light" id="trade-in">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div>
           <h2 className="font-heading mb-2 text-2xl tracking-tight">

@@ -26,71 +26,73 @@ export function FinanceCalculator() {
 
   return (
     <Section tone="light" className="bg-[#eff1f3]">
-      <h2 className="font-heading mb-6 text-2xl tracking-tight">
-        Calculadora de Financiación
-      </h2>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-price">
-              Precio del Vehículo (US$)
-            </Label>
-            <Input
-              id="fc-price"
-              type="number"
-              min={0}
-              value={price}
-              onChange={(e) => setPrice(Number(e.target.value) || 0)}
-            />
+      <div className="rounded-[12px] border border-[#0d0d0d]/50 bg-transparent p-6 md:p-10">
+        <h2 className="font-heading mb-6 text-2xl tracking-tight">
+          Calculadora de Financiación
+        </h2>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="fc-price">
+                Precio del Vehículo (US$)
+              </Label>
+              <Input
+                id="fc-price"
+                type="number"
+                min={0}
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value) || 0)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="fc-down">
+                Anticipo (US$)
+              </Label>
+              <Input
+                id="fc-down"
+                type="number"
+                min={0}
+                value={downPayment}
+                onChange={(e) => setDownPayment(Number(e.target.value) || 0)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="fc-apr">
+                Tasa de Interés Anual (%)
+              </Label>
+              <Input
+                id="fc-apr"
+                type="number"
+                min={0}
+                step={0.1}
+                value={apr}
+                onChange={(e) => setApr(Number(e.target.value) || 0)}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="fc-term">
+                Plazo (meses)
+              </Label>
+              <Input
+                id="fc-term"
+                type="number"
+                min={1}
+                value={termMonths}
+                onChange={(e) => setTermMonths(Number(e.target.value) || 1)}
+              />
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-down">
-              Anticipo (US$)
-            </Label>
-            <Input
-              id="fc-down"
-              type="number"
-              min={0}
-              value={downPayment}
-              onChange={(e) => setDownPayment(Number(e.target.value) || 0)}
-            />
+          <div className="flex flex-col items-center justify-center gap-2 rounded-[12px] border border-[#0d0d0d]/10 p-8 text-center">
+            <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
+              Cuota Mensual Estimada
+            </p>
+            <p
+              data-testid="monthly-payment"
+              className="font-heading text-5xl text-[#0d0d0d]"
+            >
+              {formatPrice(Math.round(monthlyPayment))}
+            </p>
           </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-apr">
-              Tasa de Interés Anual (%)
-            </Label>
-            <Input
-              id="fc-apr"
-              type="number"
-              min={0}
-              step={0.1}
-              value={apr}
-              onChange={(e) => setApr(Number(e.target.value) || 0)}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="fc-term">
-              Plazo (meses)
-            </Label>
-            <Input
-              id="fc-term"
-              type="number"
-              min={1}
-              value={termMonths}
-              onChange={(e) => setTermMonths(Number(e.target.value) || 1)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-2 border border-[#0d0d0d]/10 p-8 text-center">
-          <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
-            Cuota Mensual Estimada
-          </p>
-          <p
-            data-testid="monthly-payment"
-            className="font-heading text-5xl text-[#0d0d0d]"
-          >
-            {formatPrice(Math.round(monthlyPayment))}
-          </p>
         </div>
       </div>
     </Section>

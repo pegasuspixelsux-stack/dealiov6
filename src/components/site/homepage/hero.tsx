@@ -32,7 +32,7 @@ export function Hero({ dealership }: { dealership: DealershipConfig }) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1440px] p-4 pt-3 md:px-[50px] md:pt-4 md:pb-[50px]">
+      <div className="mx-auto max-w-[1440px] pt-3 pb-4 md:pt-4 md:pb-[50px]">
         <div className="flex items-center justify-between gap-4 rounded-[12px] border border-[#0d0d0d]/50 bg-transparent p-6 text-[#0d0d0d] md:p-8">
           <p className="font-heading text-xl tracking-tight sm:text-2xl">
             ¿Buscás tu próximo auto?

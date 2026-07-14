@@ -42,6 +42,7 @@ export function FinanceCalculator() {
                 min={0}
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value) || 0)}
+                className="border-[#0d0d0d]/50"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -54,6 +55,7 @@ export function FinanceCalculator() {
                 min={0}
                 value={downPayment}
                 onChange={(e) => setDownPayment(Number(e.target.value) || 0)}
+                className="border-[#0d0d0d]/50"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -67,6 +69,7 @@ export function FinanceCalculator() {
                 step={0.1}
                 value={apr}
                 onChange={(e) => setApr(Number(e.target.value) || 0)}
+                className="border-[#0d0d0d]/50"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -79,10 +82,11 @@ export function FinanceCalculator() {
                 min={1}
                 value={termMonths}
                 onChange={(e) => setTermMonths(Number(e.target.value) || 1)}
+                className="border-[#0d0d0d]/50"
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center gap-2 rounded-[12px] border border-[#0d0d0d]/10 p-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-2 rounded-[12px] border border-[#0d0d0d]/50 p-8 text-center">
             <p className="text-sm uppercase tracking-wide text-[#0d0d0d]/60">
               Cuota Mensual Estimada
             </p>
